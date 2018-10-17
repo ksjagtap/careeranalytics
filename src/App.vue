@@ -1,14 +1,23 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+import Firebase from 'firebase'
+
+
+const App = Firebase.initializeApp({
+  // config goes here
+})
+
+export const db = firebaseApp.database();  // from every component we need to import {db} from here
+
+// export default {
+//   name: 'App'
+// }
+
 </script>
 
 <style>
