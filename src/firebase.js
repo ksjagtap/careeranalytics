@@ -1,9 +1,8 @@
 import Firebase from 'firebase'
 
-const firebaseApp = Firebase.initializeApp({
-	apiKey: '',
-    authDomain: '',
+const App = Firebase.initializeApp({
+
     databaseURL: 'https://nuscareers-31907.firebaseio.com/'
   
 })
-export const db = firebaseApp.database();
+export const db = App.database();
