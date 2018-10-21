@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <router-link to='/profile'> <button>Profile</button> </router-link>
-    <router-link to='/careersByMajor'><button>Careers By Major</button></router-link>
-    <router-link to='/companydetails'> <button>Company Details</button> </router-link>
-    <router-link to='/comparecompanies'> <button>Compare Companies</button> </router-link>
-    <router-link to='/industryoutlook'> <button>Industry Outlook</button> </router-link>
+    <router-link to='/profile'> <button type="button" class="btn btn-primary">Profile</button> </router-link>
+    <router-link to='/careersByMajor'><button type="button" class="btn btn-primary">Careers By Major</button></router-link>
+    <router-link to='/companydetails'> <button type="button" class="btn btn-primary">Company Details</button> </router-link>
+    <router-link to='/comparecompanies'> <button type="button" class="btn btn-primary">Compare Companies</button> </router-link>
+    <router-link to='/industryoutlook'> <button type="button" class="btn btn-primary">Industry Outlook</button> </router-link>
     <router-view/>
   </div>
 </template>
