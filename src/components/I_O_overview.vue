@@ -1,15 +1,14 @@
 <template>
   <div>
-    <h2>Some Message</h2>
-    <app-I_O_overview></app-I_O_overview>
+    {{graduates}}
   </div>
 </template>
 
 
 <script>
 
-import I_O_overview from './I_O_overview.vue'
-
+import Firebase from 'firebase'
+import {db} from '../firebase.js'
 
   export default {
     data: function() {
@@ -19,18 +18,16 @@ import I_O_overview from './I_O_overview.vue'
       
     },
 
-    components: {
-      'app-I_O_overview': I_O_overview
-    },
-
     methods: {
       
     },
 
     firebase: {
-
+      graduates: {
+        source: db.ref("company").child("data"),
+        asObject: true
+      }
       
     }
   }
-
 </script>
