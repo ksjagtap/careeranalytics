@@ -1,8 +1,11 @@
 <template>
+  
   <div>
-    <h2>Some Message</h2>
+    <h2> Industry Outlook </h2>
+    <br>
     <app-I_O_overview></app-I_O_overview>
   </div>
+
 </template>
 
 
