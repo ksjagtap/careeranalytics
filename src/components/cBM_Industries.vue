@@ -2,11 +2,9 @@
 <template>
   <div>
     <h2> Industries </h2>
-  <div v-for = "(ind, key) in industry">{{key}}: {{gradsByInd(key)}} 
-  </div>
-  <h2> Graduate Industry </h2>
-  <div v-for = "(graduate, key) in graduates">
-    {{graduate.Industry}} 
+    <input type="text" v-model="searchByMajor">
+  <div v-for = "(ind, key) in industry"> {{key}}: {{gradsByInd(key, searchByMajor)}} </div>
+  {{gradsPerInd}}
   </div>
 </div>
 </template>
@@ -17,6 +15,8 @@ import {db} from '../firebase.js';
   export default {
     data: function(){
       return{
+        gradsPerInd: [],
+        searchByMajor: '',
       }
     },
 
@@ -42,14 +42,13 @@ import {db} from '../firebase.js';
     },
 
     methods: {
-      gradsByInd (key) {
-        //loop thru each grad: if grad's industry corresponds to the curr industry, add one to
-        // number of grads employed by that industry. 
+      gradsByInd (key, searchByMajor) {
+        /*loop thru each grad: if grad's industry corresponds to the curr industry, add one to
+         number of grads employed by that industry.*/
         let count = 0;
         for (var grad in this.grads){
-          if (key === this.grads[grad]["Industry"]){
+          if (key === this.grads[grad]["Industry"] && this.grads[grad]["Faculty (First Major)"].toLowerCase()===searchByMajor.toLowerCase()){
             count++;
-            console.log(key, count);
           }
         }
         return count;
