@@ -2,9 +2,8 @@
 <template>
   <div>
     <h2> Industries </h2>
-    <input type="text" v-model="searchByMajor">
+    <input type="text" v-model="searchByMajor" placeholder="Search By Major">
   <div v-for = "(ind, key) in industry"> {{key}}: {{gradsByInd(key, searchByMajor)}} </div>
-  {{gradsPerInd}}
   </div>
 </div>
 </template>
@@ -15,7 +14,6 @@ import {db} from '../firebase.js';
   export default {
     data: function(){
       return{
-        gradsPerInd: [],
         searchByMajor: '',
       }
     },

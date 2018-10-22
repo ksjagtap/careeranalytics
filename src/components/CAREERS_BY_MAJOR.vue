@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Industries</h1>
     <app-cbm_industries></app-cbm_industries>
   </div>
 </template>
