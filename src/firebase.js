@@ -9,3 +9,4 @@ const App = Firebase.initializeApp({
 })
 
 export const db = App.database();
+
