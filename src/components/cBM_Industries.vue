@@ -37,10 +37,14 @@ import Vue from 'vue'
             }
           }
           if (count !== 0){
-            result.push([ind, count]);
+            this.binaryInsert(ind, count, result, 0, result.length);
           }
         }
-        return result;
+        //sorted by values alr but haven't filter out top X
+        // do we need to include industries w same value as the Xth industry?
+        //e.g. banking is the 5th industry w highest num of grads, but 
+        // infocomm industry hires same num as banking, need to include in bar chart too?
+        return result.reverse();
       }
 
     },
@@ -55,6 +59,42 @@ import Vue from 'vue'
         asObject: true,
       }
     },
+
+    methods: {
+      binaryInsert(ind, count, array, startVal, endVal){
+        var length = array.length;
+        var start = startVal;
+        var end = endVal-1;
+        var m = start + Math.floor((end - start)/2);
+        if(length == 0){
+          array.push([ind, count]);
+          return;
+        }
+        if(count >= array[end][1]){
+          array.splice(end+1, 0, [ind, count]);
+          return;
+        }
+        if(count <= array[start][1]){
+          array.splice(start, 0, [ind, count]);
+          return;
+        } 
+
+        if(start >= end){
+          return;
+        }
+
+        if(count < array[m][1]){
+          this.binaryInsert(ind, count, array, start, m);
+          return;
+        }
+
+        if(count > array[m][1]){
+          this.binaryInsert(ind, count,array, m + 1, end);
+          return;
+        }
+
+      }
+    }
 }
 
 </script>
