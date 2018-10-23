@@ -3,9 +3,10 @@
   <div>
     <h2> Industries </h2>
     <input type="text" v-model="searchByMajor" placeholder="Search By Major">
-  <div v-for = "(ind, key) in industry"> {{key}}: {{gradsByInd(key, searchByMajor)}} </div>
-  </div>
+  <div v-for = "(ind, key) in industry" v-if = "gradsByInd(key, searchByMajor)!==0"> 
+    {{key}}: {{gradsByInd(key, searchByMajor)}} </div>
 </div>
+
 </template>
 
 <script>
