@@ -2,7 +2,7 @@
   <div>
     <h2> Industries </h2>
     <input type="text" v-model="searchByMajor" placeholder="Search By Major" >
-    <column-chart :data="ByMajor"></column-chart>
+    <column-chart :data="indStats"></column-chart>
 </div>
 
 </template>
@@ -27,7 +27,7 @@ import Vue from 'vue'
         return this.graduates;
       },
 
-      ByMajor(){
+      indStats(){
         const result = []; 
         for (var ind in this.industries){
           var count = 0;
