@@ -17,9 +17,9 @@ import I_O_overview from './I_O_overview.vue'
   export default {
     data: function() {
       return{
-        
+
       }
-      
+
     },
 
     components: {
@@ -27,12 +27,12 @@ import I_O_overview from './I_O_overview.vue'
     },
 
     methods: {
-      
+
     },
 
     firebase: {
 
-      
+
     }
   }
 
