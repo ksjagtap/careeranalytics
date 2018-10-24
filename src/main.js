@@ -4,15 +4,20 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueFire from 'vuefire'
+import Chart from 'chart.js';
+import VueChartkick from 'vue-chartkick'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import cBM_Industries from './components/cBM_Industries.vue'
 
 Vue.config.productionTip = false
 
+Vue.use(VueChartkick, {adapter: Chart});
 Vue.use(VueFire)
 Vue.use(router)
 Vue.use(BootstrapVue)
+Vue.component('app-cbm_industries', cBM_Industries);
 
 /* eslint-disable no-new */
 new Vue({
