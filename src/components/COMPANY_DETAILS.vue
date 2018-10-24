@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Some Message</h2>
-    <app-comp_details></app-comp_details>
+    <app-comp-details></app-comp-details>
   </div>
 </template>
 
