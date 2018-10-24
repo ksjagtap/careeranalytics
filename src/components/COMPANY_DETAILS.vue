@@ -1,0 +1,36 @@
+<template>
+  <div>
+    <h2>Some Message</h2>
+    <app-comp_details></app-comp_details>
+  </div>
+</template>
+
+
+<script>
+
+import comp_details from './comp_details'
+
+
+  export default {
+    data: function() {
+      return{
+
+      }
+
+    },
+
+    components: {
+      'app-comp_details': comp_details
+    },
+
+    methods: {
+
+    },
+
+    firebase: {
+
+
+    }
+  }
+
+</script>
