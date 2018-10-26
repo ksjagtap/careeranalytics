@@ -6,11 +6,11 @@
     <option value="" disabled selected>Select Position</option>
     <option v-for="Pos in companyPositions" :value="Pos">{{Pos}}</option>
   </select> </br>
-  <!-- Industry:
+  Industry:
   <select v-model="currIndustry">
     <option value="" disabled selected>Select Industry (Select Position First)</option>
     <option v-for="ind in dynamicInd" :value="ind">{{ind}}</option>
-  </select> -->
+  </select>
   <table align='center'>
         <thead>
             <tr>
@@ -164,7 +164,8 @@ export default {
         var companies = this.processData();
 
         for(var company in companies) {
-          if (companies[company]["Industry"] === "NA") { continue; }
+          var industry = companies[company]["Industry"];
+          if (industry === "NA") { industry = "OTHER"; }
           var positions = new Set();
           dict[company] = {};
           for(var position in companies[company]["CAP"]){
@@ -181,7 +182,7 @@ export default {
           }
           let array = Array.from(positions);
           dict[company]["Positions"] = array;
-          dict[company]["Industry"] = companies[company]["Industry"];
+          dict[company]["Industry"] = industry;
         }
         delete dict[".key"];
         return dict;

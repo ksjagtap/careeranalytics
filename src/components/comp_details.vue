@@ -1,6 +1,6 @@
 <template>
-
 <div>
+  Charts : Hiring Trend, CAP, Salary, Graduate Majors, Recommended Moduels, Related CCAs </br>
   <select v-model="currCoy">
     <option value="" disabled selected>Select Company</option>
     <option v-for="(ind, key) in mainData" :value="key">{{key}}</option>
@@ -8,29 +8,14 @@
   <select v-model="currPos">
     <option value="" disabled selected>Select Company First</option>
     <option v-for="Pos in dynamicPositions" :value="Pos">{{Pos}}</option>
-  </select>
-
-  <!-- <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>CAP</th>
-                <th>Industry</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for = "(ind, key) in mainData" >
-                <td>{{key}}</td>
-                <td>{{ind}}</td>
-                <td>{{grad.Industry}}</td>
-            </tr>
-        </tbody>
-    </table> -->
+  </select> </br>
+  <h2>Showing Statistics for {{currPos}} in {{currCoy}}</h2>
+  <div id="chartdiv"></div>
 </div>
 
 </template>
-
 <script>
+
 
 import Firebase from 'firebase'
 import {
@@ -42,16 +27,21 @@ export default {
     data: function() {
         return {
             someData: 1,
-            currCoy: "",
-            currPos: "",
-            dynamicPositions: ""
+            currCoy: "-",
+            currPos: "-",
+            dynamicPositions: "",
+            hiringTrend: "", // [year, number]
+            capDist: "", // [5: 1]
+            salary: "", //
+            majors: "" //
         };
     },
     watch: {
         currCoy: function(val){
-          console.log(val);
-          console.log(this.getPosition(val));
           this.dynamicPositions = this.getPosition(val);
+        },
+        currPos: function(val){
+          console.log(val);
         }
     },
     methods: {
@@ -60,7 +50,6 @@ export default {
         },
         getPosition: function(val){
           var company = this.mainData[val];
-          console.log(company["Positions"]);
           return company["Positions"];
         }
     },
