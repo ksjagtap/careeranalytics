@@ -10,15 +10,14 @@
     <h2> Industries </h2>
     <column-chart :data="indStats"></column-chart>
 
-    <h2> Job Titles </h2>
+    <h2> Job Positions </h2>
     <column-chart :data="jobStats"></column-chart> 
 
     <h2> Salary </h2>
     <h2> CANT PLOT HISTOGRAM T___T </h2>
-    <column-chart :data="salStats"
+    <line-chart :data="salStats"
                   :discrete="true"
                   :library="{scales: {xAxes: [{display: false,
-                barPercentage: 1.1,
                 ticks: {
                   max: dynamicSalBins.length - 2,
                 }
@@ -39,7 +38,8 @@
                 ticks: {
                   beginAtZero:true,  
                 }
-              }]}}"></column-chart>
+              }]}}"></line-chart>
+
     <!--<p> {{renderChart()}} </p>!-->
 
 </div>
@@ -49,7 +49,7 @@
 <script>
 import {db} from '../firebase.js';  
 import Vue from 'vue'
-var chart;
+
 export default {
 
     data: function(){
@@ -117,11 +117,9 @@ export default {
       salStats(){
         const result = [];
         var salaryLabels = this.dynamicSalBins;
-        console.log("LABELS", salaryLabels);
         var grads = this.grads();
-        for (var i = 0; i <= salaryLabels.length; i++){
+        for (var i = 0; i < salaryLabels.length; i++){
           var count = 0;
-          if (salaryLabels[i] === "NA") { continue; }
           for (var grad in grads){
             if (salaryLabels[i] === Math.ceil(grads[grad]['Salary']/1000)){
               count++;
@@ -234,7 +232,7 @@ export default {
         }
         var bins = Math.ceil(sal/1000);
         var arrBins = new Set();
-          for (var i = 0; i <= bins; i++){
+          for (var i = 0; i <= bins+1; i++){
             arrBins.add(i);
           }
           let array = Array.from(arrBins);
@@ -245,14 +243,10 @@ export default {
         //document.getElementById("chartContainer").innerHTML = '&nbsp;';
         //document.getElementById("chartContainer").innerHTML = '<canvas id="myChart"></canvas>';
         var ctx = document.getElementById('myChart').getContext('2d');
-
-        if (this.chart) {
-          this.chart.destroy();
-        }
-        chart = new Chart(ctx, {
+        var chart = new Chart(ctx, {
            type: 'bar',
            data: {
-            labels: this.salaryLabels,
+            labels: this.dynamicSalBins,
             datasets: [{
               data: this.salStats,
               backgroundColor: 'rgba(90, 204, 242, 0.89)',
@@ -267,7 +261,7 @@ export default {
                 display: false,
                 barPercentage: 1.1,
                 ticks: {
-                  max: this.salaryLabels.length - 2,
+                  max: this.dynamicSalBins.length - 2,
                 }
               }, {scaleLabel:{
                 display: true,
@@ -275,7 +269,7 @@ export default {
               },
                 ticks: {
                     autoSkip: false,
-                  max: this.salaryLabels.length - 1,
+                  max: this.dynamicSalBins.length - 1,
                   
                 }
               }],
