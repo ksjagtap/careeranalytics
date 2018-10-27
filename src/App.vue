@@ -1,17 +1,32 @@
 <template>
   <div id="app">
-    <router-link to='/profile'> <button type="button" class="btn btn-primary">Profile</button> </router-link>
-    <router-link to='/careersByMajor'><button type="button" class="btn btn-primary">Careers By Major</button></router-link>
-    <router-link to='/industryoutlook'> <button type="button" class="btn btn-primary">Industry Outlook</button> </router-link>
-    <router-link to='/comparecompanies'> <button type="button" class="btn btn-primary">Compare Companies</button> </router-link>
-    <router-link to='/companydetails'> <button type="button" class="btn btn-primary">Company Details</button> </router-link>
-    <router-view/>
+    <img :src="image" alt="NUSCareersLogo" height="45" width="170" align='left'>
+    <b-tabs>
+      <b-tab title="Profile" active> </br>
+        <br> Profile Page/Home Page
+      </b-tab>
+      <b-tab title="Explore" active> </br>
+        <br> Jobs Descriptions
+      </b-tab>
+      <b-tab title="Jobs" > </br>
+        <router-link to='/profile'> <button type="button" class="btn btn-primary">Profile</button> </router-link>
+        <router-link to='/careersByMajor'><button type="button" class="btn btn-primary">Careers By Major</button></router-link>
+        <router-link to='/industryoutlook'> <button type="button" class="btn btn-primary">Industry Outlook</button> </router-link>
+        <router-link to='/comparecompanies'> <button type="button" class="btn btn-primary">Compare Companies</button> </router-link>
+        <router-link to='/companydetails'> <button type="button" class="btn btn-primary">Company Details</button> </router-link>
+        <router-view/>
+      </b-tab>
+      <b-tab title="Internship"> </br>
+        <br> Internship Tabs
+      </b-tab>
+    </b-tabs>
   </div>
+
 </template>
 
 <script>
 import Firebase from 'firebase'
-
+import image from './NUSCareersLogo.png'
 
 // const App = Firebase.initializeApp({
 //   // config goes here
@@ -27,7 +42,12 @@ import Firebase from 'firebase'
 // export const db = App.database();  // from every component we need to import {db} from here
 
 export default {
-  name: 'App'
+  name: 'App',
+  data: function () {
+      return {
+          image: image
+      }
+  }
 }
 
 </script>
@@ -39,6 +59,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  vertical-align: top;
 }
 </style>
