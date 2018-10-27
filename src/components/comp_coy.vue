@@ -84,6 +84,9 @@ export default {
           this.tableData = this.calTableData(val);
         },
         currIndustry: function(val){
+          if(this.currIndustry == ""){
+            return;
+          }
           this.tableData = this.processTableData(val);
         }
     },
@@ -141,6 +144,35 @@ export default {
         },
         processTableData: function() {
           //This one calculates by position and industry
+          var final = [];
+          var arr = ["Salaries", "CAP"];
+          for(var company in this.mainData){
+            var coy = this.mainData[company];
+            if(this.arrContains(coy.Positions, this.currPos)){
+              if(coy.Industry != this.currIndustry){
+                console.log(coy.Industry);
+                console.log(this.currIndustry);
+                // if doesn't contain the industry, skip
+                continue;
+              }
+              var dict = {};
+              // if the position is in the company, yay
+              dict["Name"] = company;
+              for(var a in arr){
+                var variable = arr[a];
+                let values = coy[this.currPos][variable];
+                let median = this.median(values);
+                dict[variable] = median;
+                // if(median == 0){
+                //   dict[variable] = "NA";
+                // } else {
+                //   dict[variable] = median;
+                // }
+              }
+              final.push(dict);
+            }
+          }
+          return final;
         },
         processData: function() {
           return this.companies;
