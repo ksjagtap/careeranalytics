@@ -9,8 +9,10 @@
 
     <h2> Industries </h2>
     <column-chart :data="indStats"></column-chart>
+
     <h2> Job Titles </h2>
     <column-chart :data="jobStats"></column-chart> 
+
     <h2> Salary </h2>
     <h2> CANT PLOT HISTOGRAM T___T </h2>
     <column-chart :data="salStats"
@@ -18,7 +20,7 @@
                   :library="{scales: {xAxes: [{display: false,
                 barPercentage: 1.1,
                 ticks: {
-                  max: salaryLabels.length - 2,
+                  max: dynamicSalBins.length - 2,
                 }
               }, {scaleLabel:{
                 display: true,
@@ -26,7 +28,7 @@
               },
                 ticks: {
                     autoSkip: false,
-                  max: salaryLabels.length - 1,
+                  max: dynamicSalBins.length - 1,
                   
                 }, 
               }], yAxes: [{
@@ -53,31 +55,40 @@ export default {
     data: function(){
       return{
         searchByMajor: '',
+        dynamicIndForMajor: [],
+        dynamicJobForMajor: [],
+        dynamicSalBins: [],
       }
     },
 
+    watch: {
+        searchByMajor: function(val){
+          this.dynamicIndForMajor = this.getIndustry(val);
+          this.dynamicJobForMajor = this.getJobs(val);
+          this.dynamicSalBins = this.getSalary(val);
+        }
+    },
+    
     computed: {
       industry(){
         return this.industries;
       },
-
-      grads(){
-        return this.graduates;
-      },
-
       // display no of grads from selected major per industry 
       indStats(){
+        var grads = this.grads()
+        var ind = this.dynamicIndForMajor;
         const result = []; 
-        for (var i = 0; i <= this.allInd.length; i++){
+        //for (var i = 0; i <= this.allInd.length; i++){
+        for (var i = 0; i <= ind.length; i++){
           var count = 0;
-          if (this.allInd[i] === undefined) { continue; }
-          for (var grad in this.grads){
-            if (this.allInd[i] === this.grads[grad]["Industry"] && this.grads[grad]["Faculty (First Major)"].toLowerCase()===this.searchByMajor.toLowerCase()){
+          if (ind[i] === undefined) { continue; }
+          for (var grad in grads){
+            if (ind[i] === grads[grad]["Industry"]){
               count++;
             }
           }
           if (count !== 0){
-            this.binaryInsert(this.allInd[i], count, result, 0, result.length);
+            this.binaryInsert(ind[i], count, result, 0, result.length);
           }
         }
         return result.reverse();
@@ -85,18 +96,19 @@ export default {
 
       // display no of grads from selected major per job position 
       jobStats(){
+        var grads = this.grads()
+        var allJobs = this.dynamicJobForMajor;
         const result = []; 
-        for (var i = 0; i <= this.allJobs.length; i++){
+        for (var i = 0; i <= allJobs.length; i++){
           var count = 0;
-          if (this.allJobs[i] === undefined) { continue; }
-          for (var grad in this.grads){
-            if (this.allJobs[i] === this.grads[grad]["Job Title"] && 
-      this.grads[grad]["Faculty (First Major)"].toLowerCase()===this.searchByMajor.toLowerCase()){
+          if (allJobs[i] === undefined) { continue; }
+          for (var grad in grads){
+            if (allJobs[i] === grads[grad]["Job Title"]){
               count++;
             }
           }
           if (count !== 0){
-            this.binaryInsert(this.allJobs[i], count, result, 0, result.length);
+            this.binaryInsert(allJobs[i], count, result, 0, result.length);
           }
         }
         return result.reverse();
@@ -104,16 +116,18 @@ export default {
 
       salStats(){
         const result = [];
-        for (var i = 0; i <= this.salaryLabels.length; i++){
+        var salaryLabels = this.dynamicSalBins;
+        console.log("LABELS", salaryLabels);
+        var grads = this.grads();
+        for (var i = 0; i <= salaryLabels.length; i++){
           var count = 0;
-          if (this.salaryLabels[i] === "NA") { continue; }
-          for (var grad in this.grads){
-            if (this.salaryLabels[i] === Math.ceil(this.grads[grad]['Salary']/1000)&& 
-      this.grads[grad]["Faculty (First Major)"].toLowerCase()===this.searchByMajor.toLowerCase()){
+          if (salaryLabels[i] === "NA") { continue; }
+          for (var grad in grads){
+            if (salaryLabels[i] === Math.ceil(grads[grad]['Salary']/1000)){
               count++;
             }
           }
-          result.push([this.salaryLabels[i], count]);
+          result.push([salaryLabels[i], count]);
           //result.push(count);
         }
         return result;
@@ -123,58 +137,14 @@ export default {
       majors: {
         get: function() {
           var major = new Set();
-          for (var grad in this.grads){
-            if (this.grads[grad]["Faculty (First Major)"] === "NA") { continue; }
-            major.add(this.grads[grad]["Faculty (First Major)"]);
+          var grads = this.grads();
+          for (var grad in grads){
+            major.add(grads[grad]["Faculty (First Major)"]);
           }
           let array = Array.from(major);
           return array;
         }
       },
-
-      // find all job positions of all grads.
-      allJobs: {
-        get: function () {
-          var jobs = new Set();
-          for(var grad in this.grads) {
-            jobs.add(this.grads[grad]["Job Title"]);
-          }
-          let array = Array.from(jobs);
-          return array;
-        }
-      },
-
-      // find all industries grads are working at. 
-      allInd: {
-        get: function () {
-          var ind = new Set();
-          for(var grad in this.grads) {
-            ind.add(this.grads[grad]["Industry"]);
-          }
-          let array = Array.from(ind);
-          return array;
-        }
-      },
-
-      //find the number of bins to create ( by 1000)
-      salaryLabels: {
-        get: function() {
-          var sal = 0;
-          for (var grad in this.grads) {
-            if (this.grads[grad]["Salary"] >= sal){
-              sal = this.grads[grad]["Salary"];
-            }
-          }
-          var bins = Math.ceil(sal/1000);
-          var arrBins = new Set();
-          for (var i = 0; i <= bins; i++){
-            arrBins.add(i);
-          }
-          let array = Array.from(arrBins);
-          return array;
-        }
-      }
-
     },
 
     firebase: {
@@ -221,7 +191,55 @@ export default {
           return;
         }
 
+      },
+      grads: function(){
+        return this.graduates;
       }, 
+
+      getIndustry: function(val){
+        var arr = new Set();
+        var grads = this.grads();
+        for(var grad in grads){
+          if(grads[grad]["Faculty (First Major)"] === val){
+            arr.add(grads[grad]["Industry"]);
+          }
+        }
+        let array = Array.from(arr);
+        return array;
+      },
+
+      getJobs: function(val){
+        var arr = new Set();
+        var grads = this.grads();
+        for (var grad in grads){
+          if (grads[grad]["Faculty (First Major)"] === val){
+            arr.add(grads[grad]["Job Title"]);
+          }
+        }
+        let array = Array.from(arr);
+        return array;
+      },
+
+      getSalary: function(val){
+        var arr = new Set();
+        var sal = 0;
+        var grads = this.grads();
+        for(var grad in grads){
+          if (grads[grad]["Faculty (First Major)"] === val){
+            arr.add(grads[grad]["Salary"]);
+            if (grads[grad]["Salary"] >= sal){
+              sal = grads[grad]["Salary"];
+            }
+          }
+        }
+        var bins = Math.ceil(sal/1000);
+        var arrBins = new Set();
+          for (var i = 0; i <= bins; i++){
+            arrBins.add(i);
+          }
+          let array = Array.from(arrBins);
+          return array;
+        },
 
       /*renderChart () {
         //document.getElementById("chartContainer").innerHTML = '&nbsp;';
