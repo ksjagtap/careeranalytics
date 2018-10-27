@@ -15,6 +15,7 @@ import AmSerial from 'amcharts3/amcharts/serial'
 
 import cBM_Industries from './components/cBM_Industries.vue'
 import comp_details from './components/comp_details.vue'
+import I_O_overview from './components/I_O_overview.vue'
 
 Vue.config.productionTip = false
 
@@ -22,9 +23,12 @@ Vue.use(VueGoogleCharts);
 Vue.use(AmCharts);
 Vue.use(AmSerial);
 Vue.use(VueChartkick, {adapter: Chart});
-Vue.use(VueFire);
-Vue.use(router);
-Vue.use(BootstrapVue);
+Vue.use(VueFire)
+Vue.use(router)
+Vue.use(BootstrapVue)
+
+
+Vue.component('app-I_O_overview', I_O_overview)
 Vue.component('app-cbm_industries', cBM_Industries);
 Vue.component('app-comp-details', comp_details);
 

@@ -4,7 +4,7 @@ const App = Firebase.initializeApp({
 
 	apiKey: '',
     authDomain: '',
-    databaseURL: 'https://nuscareers-31907.firebaseio.com/'
+    databaseURL: 'https://careeranalytics-7b367.firebaseio.com/'
   
 })
 

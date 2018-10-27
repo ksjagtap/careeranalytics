@@ -1,8 +1,47 @@
 <template>
   <div>
+    <div>
+      <select type="text" v-model="searchByMajor" placeholder="Search By Major" >
+        <option value="" disabled selected>Select Major</option>
+        <option v-for="maj in majors" :value="maj">{{maj}}</option>
+      </select> </br>
+    </div>
+
     <h2> Industries </h2>
-    <input type="text" v-model="searchByMajor" placeholder="Search By Major" >
     <column-chart :data="indStats"></column-chart>
+
+    <h2> Job Titles </h2>
+    <column-chart :data="jobStats"></column-chart> 
+
+    <h2> Salary </h2>
+    <h2> CANT PLOT HISTOGRAM T___T </h2>
+    <column-chart :data="salStats"
+                  :discrete="true"
+                  :library="{scales: {xAxes: [{display: false,
+                barPercentage: 1.1,
+                ticks: {
+                  max: dynamicSalBins.length - 2,
+                }
+              }, {scaleLabel:{
+                display: true,
+                labelString: 'Salary(By Thousands)',
+              },
+                ticks: {
+                    autoSkip: false,
+                  max: dynamicSalBins.length - 1,
+                  
+                }, 
+              }], yAxes: [{
+                scaleLabel:{
+                  display: true,
+                  labelString: 'Number Of Graduates'
+                },
+                ticks: {
+                  beginAtZero:true,  
+                }
+              }]}}"></column-chart>
+    <!--<p> {{renderChart()}} </p>!-->
+
 </div>
 
 </template>
@@ -10,43 +49,102 @@
 <script>
 import {db} from '../firebase.js';  
 import Vue from 'vue'
-  export default {
+var chart;
+export default {
 
     data: function(){
       return{
         searchByMajor: '',
+        dynamicIndForMajor: [],
+        dynamicJobForMajor: [],
+        dynamicSalBins: [],
       }
     },
 
+    watch: {
+        searchByMajor: function(val){
+          this.dynamicIndForMajor = this.getIndustry(val);
+          this.dynamicJobForMajor = this.getJobs(val);
+          this.dynamicSalBins = this.getSalary(val);
+        }
+    },
+    
     computed: {
       industry(){
         return this.industries;
       },
-
-      grads(){
-        return this.graduates;
-      },
-
+      // display no of grads from selected major per industry 
       indStats(){
+        var grads = this.grads()
+        var ind = this.dynamicIndForMajor;
         const result = []; 
-        for (var ind in this.industries){
+        //for (var i = 0; i <= this.allInd.length; i++){
+        for (var i = 0; i <= ind.length; i++){
           var count = 0;
-          for (var grad in this.grads){
-            if (ind === this.grads[grad]["Industry"] && this.grads[grad]["Faculty (First Major)"].toLowerCase()===this.searchByMajor.toLowerCase()){
+          if (ind[i] === undefined) { continue; }
+          for (var grad in grads){
+            if (ind[i] === grads[grad]["Industry"]){
               count++;
             }
           }
           if (count !== 0){
-            this.binaryInsert(ind, count, result, 0, result.length);
+            this.binaryInsert(ind[i], count, result, 0, result.length);
           }
         }
-        //sorted by values alr but haven't filter out top X
-        // do we need to include industries w same value as the Xth industry?
-        //e.g. banking is the 5th industry w highest num of grads, but 
-        // infocomm industry hires same num as banking, need to include in bar chart too?
         return result.reverse();
-      }
+      },
 
+      // display no of grads from selected major per job position 
+      jobStats(){
+        var grads = this.grads()
+        var allJobs = this.dynamicJobForMajor;
+        const result = []; 
+        for (var i = 0; i <= allJobs.length; i++){
+          var count = 0;
+          if (allJobs[i] === undefined) { continue; }
+          for (var grad in grads){
+            if (allJobs[i] === grads[grad]["Job Title"]){
+              count++;
+            }
+          }
+          if (count !== 0){
+            this.binaryInsert(allJobs[i], count, result, 0, result.length);
+          }
+        }
+        return result.reverse();
+      }, 
+
+      salStats(){
+        const result = [];
+        var salaryLabels = this.dynamicSalBins;
+        console.log("LABELS", salaryLabels);
+        var grads = this.grads();
+        for (var i = 0; i <= salaryLabels.length; i++){
+          var count = 0;
+          if (salaryLabels[i] === "NA") { continue; }
+          for (var grad in grads){
+            if (salaryLabels[i] === Math.ceil(grads[grad]['Salary']/1000)){
+              count++;
+            }
+          }
+          result.push([salaryLabels[i], count]);
+          //result.push(count);
+        }
+        return result;
+      },
+
+      // find all majors of all grads.
+      majors: {
+        get: function() {
+          var major = new Set();
+          var grads = this.grads();
+          for (var grad in grads){
+            major.add(grads[grad]["Faculty (First Major)"]);
+          }
+          let array = Array.from(major);
+          return array;
+        }
+      },
     },
 
     firebase: {
@@ -93,8 +191,108 @@ import Vue from 'vue'
           return;
         }
 
-      }
-    }
+      },
+      grads: function(){
+        return this.graduates;
+      }, 
+
+      getIndustry: function(val){
+        var arr = new Set();
+        var grads = this.grads();
+        for(var grad in grads){
+          if(grads[grad]["Faculty (First Major)"] === val){
+            arr.add(grads[grad]["Industry"]);
+          }
+        }
+        let array = Array.from(arr);
+        return array;
+      },
+
+      getJobs: function(val){
+        var arr = new Set();
+        var grads = this.grads();
+        for (var grad in grads){
+          if (grads[grad]["Faculty (First Major)"] === val){
+            arr.add(grads[grad]["Job Title"]);
+          }
+        }
+        let array = Array.from(arr);
+        return array;
+      },
+
+      getSalary: function(val){
+        var arr = new Set();
+        var sal = 0;
+        var grads = this.grads();
+        for(var grad in grads){
+          if (grads[grad]["Faculty (First Major)"] === val){
+            arr.add(grads[grad]["Salary"]);
+            if (grads[grad]["Salary"] >= sal){
+              sal = grads[grad]["Salary"];
+            }
+          }
+        }
+        var bins = Math.ceil(sal/1000);
+        var arrBins = new Set();
+          for (var i = 0; i <= bins; i++){
+            arrBins.add(i);
+          }
+          let array = Array.from(arrBins);
+          return array;
+        },
+
+      /*renderChart () {
+        //document.getElementById("chartContainer").innerHTML = '&nbsp;';
+        //document.getElementById("chartContainer").innerHTML = '<canvas id="myChart"></canvas>';
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        if (this.chart) {
+          this.chart.destroy();
+        }
+        chart = new Chart(ctx, {
+           type: 'bar',
+           data: {
+            labels: this.salaryLabels,
+            datasets: [{
+              data: this.salStats,
+              backgroundColor: 'rgba(90, 204, 242, 0.89)',
+            }]
+        },
+            options: {
+              legend: {
+                display: false
+              },
+              scales: {
+              xAxes: [{
+                display: false,
+                barPercentage: 1.1,
+                ticks: {
+                  max: this.salaryLabels.length - 2,
+                }
+              }, {scaleLabel:{
+                display: true,
+                labelString: 'Salary(By Thousands)',
+              },
+                ticks: {
+                    autoSkip: false,
+                  max: this.salaryLabels.length - 1,
+                  
+                }
+              }],
+              yAxes: [{
+                scaleLabel:{
+                  display: true,
+                  labelString: 'Number Of Graduates'
+                },
+                ticks: {
+                  beginAtZero:true,  
+                }
+              }]
+              }
+            }
+        });
+    }*/
+  }
 }
 
 </script>

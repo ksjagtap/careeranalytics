@@ -90,6 +90,7 @@ export default {
           this.tableData = this.processTableData(val);
         }
     },
+    
     methods: {
         arrContains: function(arr, value){
           for(var val in arr){
