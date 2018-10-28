@@ -17,7 +17,11 @@
         <router-view/>
       </b-tab>
       <b-tab title="Internship"> </br>
-        <br> Internship Tabs
+        <router-link to='/careersByMajor'><button type="button" class="btn btn-primary">Careers By Major</button></router-link>
+        <router-link to='/industryoutlook'> <button type="button" class="btn btn-primary">Industry Outlook</button> </router-link>
+        <router-link to='/comparecompanies'> <button type="button" class="btn btn-primary">Compare Companies</button> </router-link>
+        <router-link to='/companydetails'> <button type="button" class="btn btn-primary">Company Details</button> </router-link>
+        <router-view/>
       </b-tab>
     </b-tabs>
   </div>
