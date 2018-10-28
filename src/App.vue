@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!-- <img :src="image" alt="NUSCareersLogo" height="45" width="170" align='left'> -->
+    <img :src="image" alt="NUSCareersLogo" height="45" width="170" align='left'>
     <b-tabs>
       <b-tab title="Profile" active> </br>
         <br> Profile Page/Home Page
@@ -26,7 +26,7 @@
 
 <script>
 import Firebase from 'firebase'
-// import image from './NUSCareersLogo.png'
+import image from './NUSCareersLogo.png'
 
 // const App = Firebase.initializeApp({
 //   // config goes here
@@ -45,7 +45,7 @@ export default {
   name: 'App',
   data: function () {
       return {
-          //image: image
+          image: image
       }
   }
 }
