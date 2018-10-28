@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Some Message</h2>
+    <h2>Company Details</h2>
     <app-comp-details></app-comp-details>
   </div>
 </template>

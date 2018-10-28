@@ -1,31 +1,88 @@
 <template>
 <div>
-  Charts : Hiring Trend, CAP, Salary, Graduate Majors, Recommended Moduels, Related CCAs </br>
-  <select v-model="currCoy">
-    <option value="" disabled selected>Select Company</option>
-    <option v-for="(ind, key) in mainData" :value="key">{{key}}</option>
-  </select>
-  <select v-model="currPos">
-    <option value="" disabled selected>Select Company First</option>
-    <option v-for="Pos in dynamicPositions" :value="Pos">{{Pos}}</option>
-  </select> </br>
-  <h2>Showing Statistics for {{currPos}} in {{currCoy}}</h2>
+  <form>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <h6>Select Company :</h6>
+      <select v-model="currCoy" class="form-control form-control-sm">
+        <option value="" selected disabled>Select Company</option>
+        <option v-for="(ind, key) in mainData" :value="key">{{key}}</option>
+      </select> </br>
+    </div>
+    <div class="col">
+      <h6>Select Position in Company :</h6>
+      <select v-model="currPos" class="form-control form-control-sm">
+        <option value="" selected disabled>Select Company First</option>
+        <option v-for="Pos in dynamicPositions" :value="Pos">{{Pos}}</option>
+      </select> </br>
+    </div>
+    <div class="col"></div>
+  </div>
+</form>
 
-  <h2>Hiring Trend Over The Years</h2>
-  Hiring Trend {{hiringTrend}} </br>
-  <GChart type="LineChart" :data="hiringTrend"/>
-  <h2>Distribution of CAP</h2>
-  Cap Dist {{capDist}} </br>
-  <div id="capChart" style="width: 100%; height: 400px;"></div>
-  <h2>Distribution of Salary</h2>
-  Salary {{salary}} </br>
-  <div id="salaryChart" style="width: 100%; height: 400px;"></div>
-  <h2>Major Counts</h2>
-  Majors {{majors}} </br>
-  <GChart type="BarChart" :data="majors"/>
+  <h3>Showing Statistics for {{currPos}} in {{currCoy}}</h3>
+
+  <b-container fluid class="border border-info">
+   <b-row>
+     <b-col cols="3">
+       <b-list-group v-b-scrollspy:listgroup-ex>
+       </br>
+       </br>
+         <b-list-group-item href="#list-item-1">Hiring Trend</b-list-group-item>
+         <b-list-group-item href="#list-item-2">CAP Distribution</b-list-group-item>
+         <b-list-group-item href="#list-item-3">Salary Distribution</b-list-group-item>
+         <b-list-group-item href="#list-item-4">Job Majors</b-list-group-item>
+       </b-list-group>
+     </b-col>
+     <b-col cols="9">
+       <div v-if="!isHidden">
+         <h1> Please Select Company and Position </h1>
+       </br>
+       </br>
+       </br>
+       </br>
+       </br>
+       </br>
+       </br>
+       </br>
+       </br>
+       </br>
+       </br>
+       </br>
+       </br>
+       </br>
+       </br>
+       </div>
+       <div id="listgroup-ex" style="position:relative;overflow-y:auto;height:400px">
+
+         <h4 id="list-item-1">Hiring Trend Over The Years</h4>
+         <GChart type="LineChart" :data="hiringTrend" style="width: 100%; height: 250px;"/>
+
+         <h4 id="list-item-2">Distribution of CAP</h4>
+         <div id="capChart" style="width: 100%; height: 250px;"></div>
+
+         <h4 id="list-item-3">Distribution of Salary</h4>
+         <div id="salaryChart" style="width: 100%; height: 250px;"></div>
+
+         <h4 id="list-item-4">Major Counts</h4>
+         <GChart type="BarChart" :data="majors" style="width: 100%; height: 250px;"/>
+
+       </div>
+     </b-col>
+   </b-row>
+ </b-container>
 </div>
 
 </template>
+
+<style>
+
+div {
+  position: relative;
+}
+</style>
+
 <script>
 import Firebase from 'firebase'
 import {
@@ -43,14 +100,17 @@ export default {
             capDist:  [],
             salary: [], //
             majors: [], //
+            isHidden: false
         };
     },
     watch: {
         currCoy: function(val){
           this.dynamicPositions = this.getPosition(val);
           this.currPos = "-";
+          this.isHidden=false;
         },
         currPos: function(val){
+          this.isHidden=true;
           this.selectedData = this.getSelectedData();
           this.hiringTrend = this.getHiringTrend();
           this.capDist = this.getCapDist();
@@ -62,7 +122,7 @@ export default {
         "columnWidth": 1,
         "dataProvider": this.capDist,
         "graphs": [{
-          "fillColors": "#c55",
+          "fillColors": "#337FFF",
           "fillAlphas": 0.9,
           "lineColor": "#fff",
           "lineAlpha": 0.7,
@@ -84,7 +144,7 @@ export default {
         "columnWidth": 1,
         "dataProvider": this.salary,
         "graphs": [{
-          "fillColors": "#c55",
+          "fillColors": "#337FFF",
           "fillAlphas": 0.9,
           "lineColor": "#fff",
           "lineAlpha": 0.7,
@@ -128,13 +188,15 @@ export default {
               // initiate the current year as the first year instance
               currYear = year;
               count++;
+            } else{
+              currYear++;
             }
-            if(Number(currYear) + 1 < Number(year)){
+            if(Number(currYear) < Number(year)){
               // 14 + 1 < 16. 2 year gap between 16 and 14
               // might have a gap in the graph
               // would want to account for 15, loop through once
               for(var i = 0; i < Number(year)-Number(currYear); i++){
-                result.push([String(Number(year)+1),0]);
+                result.push([String(Number(year)+1+i),0]);
               }
             }
             result.push([year,data[year]]);
