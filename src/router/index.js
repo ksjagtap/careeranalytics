@@ -7,8 +7,6 @@ import CAREERS_BY_MAJOR from '../components/CAREERS_BY_MAJOR.vue'
 import COMPANY_DETAILS from '../components/COMPANY_DETAILS.vue'
 import COMPARE_COMPANIES from '../components/COMPARE_COMPANIES.vue'
 import INDUSTRY_OUTLOOK from '../components/INDUSTRY_OUTLOOK.vue'
-import SIGNUP from '../components/signup_page.vue'
-import LOGIN from '../components/login.vue'
 
 // another way to do it
 //import INDUSTRY_OUTLOOK from '../components/INDUSTRY_OUTLOOK.vue'
@@ -53,17 +51,6 @@ export default new Router({
       name: 'INDUSTRY_OUTLOOK',
       component: INDUSTRY_OUTLOOK
     },
-
-    {
-      path: '/signup',
-      name: 'SIGNUP',
-      component: SIGNUP
-    },
-
-    {
-      path: '/login',
-      name: 'LOGIN',
-      component: LOGIN
-    },
+    
   ]
 })
