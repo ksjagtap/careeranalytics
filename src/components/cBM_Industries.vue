@@ -15,6 +15,10 @@
 
     <h2> Salary </h2>
     <h2> CANT PLOT HISTOGRAM T___T </h2>
+
+    <div id = "chartContainer">
+       <canvas id="myChart"></canvas>
+    </div>
     <line-chart :data="salStats"
                   :discrete="true"
                   :library="{scales: {xAxes: [{display: false,
@@ -50,6 +54,7 @@
 import {db} from '../firebase.js';  
 import Vue from 'vue'
 
+//var chart;
 export default {
 
     data: function(){
@@ -240,8 +245,8 @@ export default {
         },
 
       /*renderChart () {
-        //document.getElementById("chartContainer").innerHTML = '&nbsp;';
-        //document.getElementById("chartContainer").innerHTML = '<canvas id="myChart"></canvas>';
+        document.getElementById("chartContainer").innerHTML = '&nbsp;';
+        document.getElementById("chartContainer").innerHTML = '<canvas id="myChart"></canvas>';
         var ctx = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctx, {
            type: 'bar',
@@ -285,6 +290,7 @@ export default {
               }
             }
         });
+        console.log(chart);
     }*/
   }
 }

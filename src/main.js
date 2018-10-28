@@ -12,6 +12,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueGoogleCharts from 'vue-google-charts'
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
+import VueCharts from 'vue-charts'
 
 import cBM_Industries from './components/cBM_Industries.vue'
 import comp_details from './components/comp_details.vue'
@@ -26,6 +27,7 @@ Vue.use(VueChartkick, {adapter: Chart});
 Vue.use(VueFire)
 Vue.use(router)
 Vue.use(BootstrapVue)
+Vue.use(VueCharts);
 
 
 Vue.component('app-I_O_overview', I_O_overview)

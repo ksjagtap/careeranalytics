@@ -1,10 +1,19 @@
 <template>
   <div>
-    <div v-for = "(index, key) in industryCount"> {{key}} : {{industryCount[key]}} </div>
     <br>
-    <h3>BREAK POINT</h3>
+    <vue-chart
+      chart-type="LineChart"
+      :columns="columns"
+      :rows="rows"
+      :options="options"
+    ></vue-chart></vue-chart>
+    <br>
+    <h3>Columns</h3>
     <!-- {{ graduates }} -->
-    <div v-for = "(index, key) in grads"> {{key}} : {{grads[key]}} </div>
+    <div v-for = "(index, key) in columnsReal"> {{key}} : {{columnsReal[key]}} </div>
+    
+    <h3>Industries</h3>
+    <div>{{rowsReal}}</div>
   </div>
 </template>
 
@@ -19,22 +28,81 @@ import {db} from '../firebase.js'
     data: function() {
       return{
         // key: industry, value: [[year, num]...]
-        industryData: {},
-        industryDataLoaded: false,
+        columns: [{
+                    'type': 'string',
+                    'label': 'Year'
+                }, {
+                    'type': 'number',
+                    'label': 'Banking and Finance'
+                }, {
+                    'type': 'number',
+                    'label': 'Technology and Internet'
+                }],
+        rows: [
+                ['2014', 1000, 400],
+                ['2015', 1170, 460],
+                ['2016', 660, 1120],
+                ['2017', 1030, 540]
+              ],
 
-        // key: industry, value: count of number of graduate. Later get top 5.
-        industryCount: {"ind1": 1, "ind2": 2}
+        options:
+              {
+                title: 'Industries Overview',
+                hAxis: {
+                    title: 'Year',
+                    minValue: '2014',
+                    maxValue: '2017'
+                },
+                vAxis: {
+                    title: '',
+                    minValue: 300,
+                    maxValue: 1200
+                },
+                width: 1100,
+                height: 500,
+                curveType: 'function'
+              },
+
       };
       
     },
 
     mounted: function (){
-      this.populateIndustryData()
+      console.log("Mounted")
+      //console.log(this.columnsReal)
+
     },
 
     computed: {
-      grads(){
-        return this.graduates;
+      grads() {
+        return this.graduates
+      },
+      // inds() {
+      //   return this.industries
+      // },
+
+      columnsReal() {
+        var inds = this.inds()
+        var res = [{'type': 'string',
+                   'label': 'year'
+                 }]
+
+        for (var industry in inds){
+          if (industry===".key"){break}
+          res.push({'type':'number', 'label': industry})
+        }
+        return res
+      },
+
+      rowsReal() {
+        // store the indexes of each industry ==> which index in rows should this industry be?
+        var industryIndexes = {}
+        for (var index in this.columnsReal){
+          var industryName = this.columnsReal[index]['label']
+          industryIndexes[industryName] = index-1;
+        }
+
+        var rows = [["2014"], ["2015"], ["2016"], ["2017"]];
       }
 
     },
@@ -42,6 +110,10 @@ import {db} from '../firebase.js'
     firebase: {
       graduates: {
         source: db.ref("graduate").child("data"),
+        asObject: true
+      },
+      industries: {
+        source: db.ref("industries").child("data"),
         asObject: true
       }
     },
@@ -75,7 +147,13 @@ import {db} from '../firebase.js'
         // });
 
         return this.industryCount;
+      },
+
+      inds: function() {
+          return this.industries;
       }
+
+
     },
       
     
