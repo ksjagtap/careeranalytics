@@ -4,7 +4,6 @@
     <div>
       <h2> Overview </h2>
     </div>
-
     <div>
       <select type="text" v-model="searchIndustry" placeholder="Search By Major" >
         <option value="" disabled selected>Select Industry</option>
@@ -31,22 +30,12 @@ export default {
         years: ['14', '15', '16', '17'],
         dynamicGrads: [],
         dynamicJobs: [],
-        allInd: [],
-        databaseUrl: 'https://careeranalytics-7b367.firebaseio.com/graduate/data.json'
       }
     },
-    //for each industry
-    // data = [{name: 'job role', data: {2017: 3, 2016: 4, 2013: 2}}]
-    mounted: function(){
-      this.industryOverview()
-    },
-
-
     watch: {
       searchIndustry: function(val){
         this.dynamicGrads = this.getGradsInIndustry(val);
         this.dynamicJobs = this.getJobs(val);
-        this.allInd = this.getIndustry();
       }
     },
 
@@ -87,22 +76,6 @@ export default {
         return this.industries;
       },
 
-      getIndustry: function(){
-        var arr = new Set();
-        var industries = this.industry();
-        for (var ind in industries){
-          arr.add(ind);
-          //console.log("IND", arr);
-        }
-        let array = Array.from(arr);
-        return array;
-      },
-
-      industryOverview: async function(){
-        //let inds = await axios.get(this.databaseUrl);
-        //console.log(inds);
-      },
-
       getGradsInIndustry: function(val){
         var arr = [];
         var grads = this.grads();
@@ -121,14 +94,12 @@ export default {
         for (var grad in grads){
           if (grads[grad]["Industry"] === val){
             arr.add(grads[grad]["Job Title"]);
-            //console.log("GRADuatesS", arr);
           }
         }
         let array = Array.from(arr);
         return array;
-      }, 
-
-    },
+      },
+    }, 
 
     firebase: {
       industries: {
@@ -247,7 +218,7 @@ import {db} from '../firebase.js'
           industryIndexes[industryName] = index-1;
         }
 
-        var rows = [["2014"], ["2015"], ["2016"], ["2017"]];
+        var rows = [["2014", ], ["2015"], ["2016"], ["2017"]];
       }
 
     },
