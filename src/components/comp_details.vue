@@ -114,7 +114,7 @@ export default {
     watch: {
         currCoy: function(val){
           this.dynamicPositions = this.getPosition(val);
-          this.currPos = "-";
+          this.currPos = "";
         },
         currPos: function(val){
           this.selectedData = this.getSelectedData();
@@ -139,7 +139,7 @@ export default {
         "categoryField": "category",
         "categoryAxis": {
           "startOnAxis": true,
-          "title": "Try"
+          "title": "CAP"
         },
         "valueAxes": [{
           "title": "Count"
@@ -161,7 +161,7 @@ export default {
         "categoryField": "category",
         "categoryAxis": {
           "startOnAxis": true,
-          "title": "Try"
+          "title": "Salary"
         },
         "valueAxes": [{
           "title": "Count"

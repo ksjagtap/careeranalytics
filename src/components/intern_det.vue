@@ -61,7 +61,7 @@
            <h4 id="list-item-1"><u>Internship Year Profile</u></h4>
            <GChart type="PieChart" :data="internYear" style="width: 100%; height: 250px;"/>
            </br></br></br>
-           
+
            <h4 id="list-item-2"><u>Hiring Trend Over The Years</u></h4>
            <GChart type="LineChart" :data="hiringTrend" style="width: 100%; height: 250px;"/>
            </br></br></br>
@@ -69,11 +69,11 @@
            <h4 id="list-item-3"><u>Distribution of CAP</u></h4>
            <div id="internCapChart" style="width: 100%; height: 250px;"></div>
            </br></br></br>
-           
+
            <h4 id="list-item-4"><u>Distribution of Salary</u></h4>
            <div id="internSalaryChart" style="width: 100%; height: 250px;"></div>
            </br></br></br>
-           
+
            <h4 id="list-item-5"><u>Major Counts</u></h4>
            <GChart type="BarChart" :data="majors" style="width: 100%; height: 250px;"/> </br></br></br></br></br></br>
 
@@ -116,7 +116,7 @@ export default {
   watch: {
       currCoy: function(val){
         this.dynamicPositions = this.getPosition(val);
-        this.currPos = "-";
+        this.currPos = "";
         this.isHidden=false;
       },
       currPos: function(val){
@@ -144,7 +144,7 @@ export default {
       "categoryField": "category",
       "categoryAxis": {
         "startOnAxis": true,
-        "title": "Try"
+        "title": "CAP"
       },
       "valueAxes": [{
         "title": "Count"
@@ -166,7 +166,7 @@ export default {
       "categoryField": "category",
       "categoryAxis": {
         "startOnAxis": true,
-        "title": "Try"
+        "title": "Allowance"
       },
       "valueAxes": [{
         "title": "Count"
