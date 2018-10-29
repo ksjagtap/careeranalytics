@@ -20,7 +20,7 @@
       <div class="col"></div>
     </div>
   </form>
-  <table align='center'>
+  <table align='center' class="table table-hover">
         <thead>
             <tr>
                 <th @click="sort('Name')" onmouseover="" style="cursor: pointer;">Name</th>
@@ -41,14 +41,14 @@
 </template>
 
 <style>
-select{
+/*select{
   width: 300px;
-}
+}*/
 
-table {
+/*table {
   border-collapse: collapse;
-  width: 600px;
-}
+  width: 400px;
+}*/
 
 th {
   border: 1px solid #999;
