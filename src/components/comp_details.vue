@@ -141,7 +141,7 @@ export default {
         AmCharts.makeChart("salaryChart", {
         "type": "serial",
         "theme": "light",
-        "columnWidth": 1,
+        "columnWidth": 1, 
         "dataProvider": this.salary,
         "graphs": [{
           "fillColors": "#337FFF",

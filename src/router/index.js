@@ -51,5 +51,6 @@ export default new Router({
       name: 'INDUSTRY_OUTLOOK',
       component: INDUSTRY_OUTLOOK
     },
+    
   ]
 })

@@ -13,7 +13,6 @@ import VueGoogleCharts from 'vue-google-charts'
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
 import VueCharts from 'vue-charts'
-
 import cBM_Industries from './components/cBM_Industries.vue'
 import comp_details from './components/comp_details.vue'
 import I_O_overview from './components/I_O_overview.vue'

@@ -6,8 +6,7 @@
         <option v-for="maj in majors" :value="maj">{{maj}}</option>
       </select> </br>
     </div>
-
-    <h2> Industries </h2>
+      <h2> Industries </h2>
     <column-chart :data="indStats"></column-chart>
 
     <h2> Job Positions </h2>
@@ -15,11 +14,11 @@
 
     <h2> Salary </h2>
     <h2> CANT PLOT HISTOGRAM T___T </h2>
+
     <line-chart :data="salStats"
-                  :discrete="true"
                   :library="{scales: {xAxes: [{display: false,
                 ticks: {
-                  max: dynamicSalBins.length - 2,
+                  max: dynamicSalBins[-1],
                 }
               }, {scaleLabel:{
                 display: true,
@@ -27,7 +26,7 @@
               },
                 ticks: {
                     autoSkip: false,
-                  max: dynamicSalBins.length - 1,
+                  max: dynamicSalBins[-1],
                   
                 }, 
               }], yAxes: [{
@@ -50,6 +49,7 @@
 import {db} from '../firebase.js';  
 import Vue from 'vue'
 
+//var chart;
 export default {
 
     data: function(){
@@ -58,6 +58,7 @@ export default {
         dynamicIndForMajor: [],
         dynamicJobForMajor: [],
         dynamicSalBins: [],
+        dynamicGrads: [],
       }
     },
 
@@ -66,6 +67,7 @@ export default {
           this.dynamicIndForMajor = this.getIndustry(val);
           this.dynamicJobForMajor = this.getJobs(val);
           this.dynamicSalBins = this.getSalary(val);
+          this.dynamicGrads = this.getGradsInMajor(val);
         }
     },
     
@@ -75,7 +77,7 @@ export default {
       },
       // display no of grads from selected major per industry 
       indStats(){
-        var grads = this.grads()
+        var grads = this.dynamicGrads;
         var ind = this.dynamicIndForMajor;
         const result = []; 
         //for (var i = 0; i <= this.allInd.length; i++){
@@ -96,7 +98,7 @@ export default {
 
       // display no of grads from selected major per job position 
       jobStats(){
-        var grads = this.grads()
+        var grads = this.dynamicGrads;
         var allJobs = this.dynamicJobForMajor;
         const result = []; 
         for (var i = 0; i <= allJobs.length; i++){
@@ -117,15 +119,16 @@ export default {
       salStats(){
         const result = [];
         var salaryLabels = this.dynamicSalBins;
-        var grads = this.grads();
+        var grads = this.dynamicGrads;
         for (var i = 0; i < salaryLabels.length; i++){
           var count = 0;
           for (var grad in grads){
-            if (salaryLabels[i] === Math.ceil(grads[grad]['Salary']/1000)){
+            if (salaryLabels[i] === Math.floor(grads[grad]['Salary']/1000)){
               count++;
             }
           }
           result.push([salaryLabels[i], count]);
+          console.log("Result", result);
           //result.push(count);
         }
         return result;
@@ -206,6 +209,19 @@ export default {
         return array;
       },
 
+      getGradsInMajor: function(val){
+        var arr = [];
+        var grads = this.grads();
+        for(var grad in grads){
+          if(grads[grad]["Faculty (First Major)"] === val){
+            arr.push(grads[grad]);
+            //console.log("GRADuatesS", arr);
+          }
+        }
+        return arr;
+      },
+
+
       getJobs: function(val){
         var arr = new Set();
         var grads = this.grads();
@@ -227,21 +243,37 @@ export default {
             arr.add(grads[grad]["Salary"]);
             if (grads[grad]["Salary"] >= sal){
               sal = grads[grad]["Salary"];
+              console.log("max sal", sal)
             }
           }
         }
+
+        var minSal = 999999; 
+        for(var grad in grads){
+          if (grads[grad]["Faculty (First Major)"] === val){
+            arr.add(grads[grad]["Salary"]);
+            if (grads[grad]["Salary"] <= minSal){
+              minSal = grads[grad]["Salary"];
+              console.log("MIN SAL", minSal);
+            }
+          }
+        }
+
         var bins = Math.ceil(sal/1000);
+        var start = Math.floor(minSal/1000);
+        console.log("START", start);
         var arrBins = new Set();
-          for (var i = 0; i <= bins+1; i++){
+          for (var i = start; i <= bins; i++){
             arrBins.add(i);
           }
           let array = Array.from(arrBins);
+          console.log(array);
           return array;
         },
 
       /*renderChart () {
-        //document.getElementById("chartContainer").innerHTML = '&nbsp;';
-        //document.getElementById("chartContainer").innerHTML = '<canvas id="myChart"></canvas>';
+        document.getElementById("chartContainer").innerHTML = '&nbsp;';
+        document.getElementById("chartContainer").innerHTML = '<canvas id="myChart"></canvas>';
         var ctx = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctx, {
            type: 'bar',
@@ -285,6 +317,7 @@ export default {
               }
             }
         });
+        console.log(chart);
     }*/
   }
 }
