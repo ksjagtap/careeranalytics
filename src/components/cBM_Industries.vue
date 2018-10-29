@@ -14,7 +14,7 @@
       </div>
     </form>
 
-    <h3>Showing Statistics for <font color="blue">{{searchByMajor}}</font></h3>
+    <h3 v-if='isHidden'>Showing Statistics for <font color="blue">{{searchByMajor}}</font></h3>
 
     <b-container fluid>
      <b-row>
@@ -53,9 +53,13 @@
            <column-chart :data="indStats"></column-chart>
 
           <br>
+          <br>
+          <br>
            <h4 id="list-item-2"><u>Job Position</u></h4>
            <column-chart :data="jobStats"></column-chart>
 
+           <br>
+           <br>
            <br>
            <h4 id="list-item-3"><u>Salaries</u></h4>
            <div id="salChart" style="width: 100%; height: 250px;"></div>
