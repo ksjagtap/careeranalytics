@@ -21,7 +21,7 @@
       <div class="col"></div>
     </div>
   </form>
-  <table align='center'>
+  <table align='center' class="table table-hover">
         <thead>
             <tr>
                 <th @click="sort('Name')" onmouseover="" style="cursor: pointer;">Name</th>
