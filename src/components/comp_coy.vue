@@ -55,7 +55,7 @@ th {
   padding: 0.5rem;
   text-align: center;
   color: #FFFFFF;
-  background-color: #337FFF;
+  background-color: #15294C;
 }
 
 td {
