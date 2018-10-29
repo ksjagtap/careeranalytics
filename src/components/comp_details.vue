@@ -287,7 +287,6 @@ export default {
           //   "category": "1",
           //   "count": 25
           // }]
-
           // Category of 1000 will contain 1000-1499
           var result = [];
           var currCount = 0;
