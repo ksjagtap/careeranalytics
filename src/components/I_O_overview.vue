@@ -10,13 +10,14 @@
      -->
 
      
-      <!-- <vue-chart
+      <vue-chart
         chart-type="LineChart"
         :columns="columnsReal"
         :rows="rowsReal"
         :options="options"
-      ></vue-chart> -->
-
+      ></vue-chart>
+      
+      </div>
 
 
       <div>
