@@ -114,7 +114,7 @@ export default {
     watch: {
         currCoy: function(val){
           this.dynamicPositions = this.getPosition(val);
-          this.currPos = "-";
+          this.currPos = "";
         },
         currPos: function(val){
           this.selectedData = this.getSelectedData();
