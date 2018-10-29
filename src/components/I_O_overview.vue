@@ -2,33 +2,49 @@
   <div>
 
       <div>
-      <br>
+    
       <vue-chart
         chart-type="LineChart"
         :columns="columnsReal"
         :rows="rowsReal"
         :options="options"
       ></vue-chart></vue-chart>
-      <br>
+      
       </div>
 
 
       <div>
+        <hr>
         <select type="text" v-model="searchIndustry" placeholder="Search By Major" >
           <option value="" disabled selected>Select Industry</option>
           <option v-for="(ind, key) in industries" :value="key">{{key}}</option>
         </select> </br>
       </div>
-
+        <br>
         <h2> Job Over Years </h2>
         <line-chart 
             :data="jobPerYear"
             :legend="true">
         </line-chart>
+        <br>
+        <br>
+        <br>
 
   </div>
 
 </template>
+
+<style>
+  hr {
+      display: block;
+      height: 20px;
+      border: 0;
+      border-top: 1px solid #ccc;
+      margin: 1em 0;
+      padding: 0; 
+      color: #333;
+  }
+</style>
 
 <script>
 import {db} from '../firebase.js';  

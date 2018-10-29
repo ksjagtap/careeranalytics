@@ -1,5 +1,7 @@
 <template>
   <div>
+    <br>
+    <br>
     <h2>Company Details</h2>
     <app-comp-details></app-comp-details>
   </div>

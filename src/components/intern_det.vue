@@ -21,7 +21,7 @@
     </div>
   </form>
 
-    <h3>Showing Statistics for {{currPos}} in {{currCoy}}</h3>
+    <h3 v-if='isHidden'>Showing Statistics for <font color="blue">{{currPos}}</font> in <font color="blue">{{currCoy}}</font></h3>
 
     <b-container fluid>
      <b-row>
@@ -38,7 +38,7 @@
        </b-col>
        <b-col cols="9">
          <div v-if="!isHidden">
-           <h1> Please Select Company and Position </h1>
+           <h6> Please Select Company and Position </h6>
          </br>
          </br>
          </br>
@@ -57,19 +57,24 @@
          </div>
          <div id="listgroup-ex" style="position:relative;overflow-y:auto;height:400px">
 
-           <h4 id="list-item-1">Internship Year Profile</h4>
+           <br>
+           <h4 id="list-item-1"><u>Internship Year Profile</u></h4>
            <GChart type="PieChart" :data="internYear" style="width: 100%; height: 250px;"/>
            </br></br></br>
-           <h4 id="list-item-2">Hiring Trend Over The Years</h4>
+           
+           <h4 id="list-item-2"><u>Hiring Trend Over The Years</u></h4>
            <GChart type="LineChart" :data="hiringTrend" style="width: 100%; height: 250px;"/>
            </br></br></br>
-           <h4 id="list-item-3">Distribution of CAP</h4>
+
+           <h4 id="list-item-3"><u>Distribution of CAP</u></h4>
            <div id="internCapChart" style="width: 100%; height: 250px;"></div>
            </br></br></br>
-           <h4 id="list-item-4">Distribution of Salary</h4>
+           
+           <h4 id="list-item-4"><u>Distribution of Salary</u></h4>
            <div id="internSalaryChart" style="width: 100%; height: 250px;"></div>
            </br></br></br>
-           <h4 id="list-item-5">Major Counts</h4>
+           
+           <h4 id="list-item-5"><u>Major Counts</u></h4>
            <GChart type="BarChart" :data="majors" style="width: 100%; height: 250px;"/> </br></br></br></br></br></br>
 
          </div>
@@ -116,13 +121,13 @@ export default {
       },
       currPos: function(val){
         // need to add for years
-        this.isHidden=true;
         this.selectedData = this.getSelectedData();
         this.hiringTrend = this.getHiringTrend();
         this.capDist = this.getCapDist();
         this.salary = this.getSalary();
         this.majors = this.getMajors();
         this.internYear = this.getInternYears();
+        this.isHidden=true;
         AmCharts.makeChart("internCapChart", {
       "type": "serial",
       "theme": "light",

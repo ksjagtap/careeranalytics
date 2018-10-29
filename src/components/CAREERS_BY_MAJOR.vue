@@ -1,8 +1,15 @@
 <template>
   <div>
+  	<br>
+  	<br>
     <h2>Careers By Major</h2>
+    
     <app-cbm_industries></app-cbm_industries>
+    <br>
+    <br>
+    <br>
   </div>
+
 </template>
 
 <script>

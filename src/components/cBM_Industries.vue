@@ -14,7 +14,7 @@
       </div>
     </form>
 
-    <h3>Showing Statistics for {{searchByMajor}}</h3>
+    <h3>Showing Statistics for <font color="blue">{{searchByMajor}}</font></h3>
 
     <b-container fluid>
      <b-row>
@@ -29,7 +29,7 @@
        </b-col>
        <b-col cols="9">
          <div v-if="!isHidden">
-           <h1> Please Select Major </h1>
+           <h6> Please Select Major </h6>
          </br>
          </br>
          </br>
@@ -47,13 +47,17 @@
          </br>
          </div>
          <div id="listgroup-ex" style="position:relative;overflow-y:auto;height:400px">
-           <h4 id="list-item-1">Industries</h4>
+           
+          <br> 
+           <h4 id="list-item-1"><u>Industries</u></h4>
            <column-chart :data="indStats"></column-chart>
 
-           <h4 id="list-item-2">Job Position</h4>
+          <br>
+           <h4 id="list-item-2"><u>Job Position</u></h4>
            <column-chart :data="jobStats"></column-chart>
 
-           <h4 id="list-item-3">Salaries</h4>
+           <br>
+           <h4 id="list-item-3"><u>Salaries</u></h4>
            <div id="salChart" style="width: 100%; height: 250px;"></div>
          </div>
        </b-col>
