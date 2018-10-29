@@ -1,4 +1,5 @@
 <template>
+
 <div>
   <form>
     <div class="row">
@@ -25,14 +26,14 @@
             <tr>
                 <th @click="sort('Name')" onmouseover="" style="cursor: pointer;">Name</th>
                 <th @click="sort('CAP')" onmouseover="" style="cursor: pointer;">CAP</th>
-                <th @click="sort('Salaries')" onmouseover="" style="cursor: pointer;">Salary</th>
+                <th @click="sort('Allowance')" onmouseover="" style="cursor: pointer;">Allowance</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for= "company in sortedTable">
                 <td>{{company.Name}}</td>
                 <td>{{company.CAP}}</td>
-                <td>{{company.Salaries}}</td>
+                <td>{{company.Allowance}}</td>
             </tr>
         </tbody>
     </table>
@@ -130,7 +131,7 @@ export default {
         calTableData: function(val) {
           //This one calculates solely based on positions, ALL industries
           var final = [];
-          var arr = ["Salaries", "CAP"];
+          var arr = ["Allowance", "CAP"];
           for(var company in this.mainData){
             var coy = this.mainData[company];
             if(this.arrContains(coy.Positions, val)){
@@ -156,7 +157,7 @@ export default {
         processTableData: function() {
           //This one calculates by position and industry
           var final = [];
-          var arr = ["Salaries", "CAP"];
+          var arr = ["Allowance", "CAP"];
           for(var company in this.mainData){
             var coy = this.mainData[company];
             if(this.arrContains(coy.Positions, this.currPos)){
@@ -197,7 +198,6 @@ export default {
             }
           }
           let array = Array.from(arr);
-          array.sort();
           return array;
         }
     },
@@ -216,12 +216,12 @@ export default {
             dict[company][position] = {};
             dict[company][position]["CAP"] = companies[company]["CAP"][position];
           }
-          for(var position in companies[company]["Salaries"]){
+          for(var position in companies[company]["Allowance"]){
             positions.add(position);
             if(!(position in dict[company])){
                 dict[company][position] = {};
             }
-            dict[company][position]["Salaries"] = companies[company]["Salaries"][position];
+            dict[company][position]["Allowance"] = companies[company]["Allowance"][position];
           }
           let array = Array.from(positions);
           dict[company]["Positions"] = array;
@@ -240,7 +240,6 @@ export default {
             }
           }
           let array = Array.from(positions);
-          array.sort();
           return array;
         },
       },
@@ -268,7 +267,7 @@ export default {
     },
     firebase: {
         companies: {
-            source: db.ref("company").child("data"),
+            source: db.ref("internship").child("data"),
             asObject: true
         }
     }

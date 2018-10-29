@@ -1,17 +1,14 @@
 <template>
-
   <div>
-    <h2> Industry Outlook </h2>
-    <br>
-    <app-I_O_overview></app-I_O_overview>
+    <h2>Internship Details</h2>
+    <app-intern-det></app-intern-det>
   </div>
-
 </template>
 
 
 <script>
 
-import I_O_overview from './I_O_overview.vue'
+import intern_det from './intern_det.vue'
 
 
   export default {
@@ -23,7 +20,7 @@ import I_O_overview from './I_O_overview.vue'
     },
 
     components: {
-      'app-I_O_overview': I_O_overview
+      'app-intern_det': intern_det
     },
 
     methods: {

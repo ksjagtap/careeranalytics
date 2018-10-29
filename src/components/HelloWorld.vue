@@ -1,7 +1,6 @@
 <template>
 	<div>
-		HELLO
-	</div>  
+	</div>
 </template>
 
 
@@ -10,7 +9,7 @@
 
 
 export default {
-  
+
 }
 
 

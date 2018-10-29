@@ -3,29 +3,24 @@
     <img :src="image" alt="NUSCareersLogo" height="45" width="170" align='left'>
     <b-tabs>
       <b-tab title="Profile" active> </br>
-        <br> Profile Page/Home Page
       </b-tab>
-      <b-tab title="Explore" active> </br>
-        <br> Jobs Descriptions
+      <b-tab title="Explore" @click="changeRoute('EXPLORE')"> </br>
+        <router-link to='/explore' hidden=true> <button type="button" class="btn btn-primary">Explore</button> </router-link>
       </b-tab>
-      <b-tab title="Jobs" > </br>
+      <b-tab title="Jobs" @click="changeRoute('CAREERS_BY_MAJOR')"> </br>
         <router-link to='/profile'> <button type="button" class="btn btn-primary">Profile</button> </router-link>
         <router-link to='/careersByMajor'><button type="button" class="btn btn-primary">Careers By Major</button></router-link>
         <router-link to='/industryoutlook'> <button type="button" class="btn btn-primary">Industry Outlook</button> </router-link>
         <router-link to='/comparecompanies'> <button type="button" class="btn btn-primary">Compare Companies</button> </router-link>
-        <router-link to='/companydetails'> <button type="button" class="btn btn-primary">Company Details</button> </router-link>
-        <router-view/>
+        <router-link to='/companydetails'> <button type="button" class="btn btn-primary">Company Details</button></router-link>
       </b-tab>
-      <b-tab title="Internship"> </br>
-        <router-link to='/careersByMajor'><button type="button" class="btn btn-primary">Careers By Major</button></router-link>
-        <router-link to='/industryoutlook'> <button type="button" class="btn btn-primary">Industry Outlook</button> </router-link>
-        <router-link to='/comparecompanies'> <button type="button" class="btn btn-primary">Compare Companies</button> </router-link>
-        <router-link to='/companydetails'> <button type="button" class="btn btn-primary">Company Details</button> </router-link>
-        <router-view/>
+      <b-tab title="Internship" @click="changeRoute('COMPARE_INTERNSHIPS')"> </br>
+        <router-link to='/compareinternships'><button type="button" class="btn btn-primary">Compare Internships</button></router-link>
+        <router-link to='/internshipdetails'> <button type="button" class="btn btn-primary">Internship Details</button></router-link>
       </b-tab>
     </b-tabs>
+    <router-view/>
   </div>
-
 </template>
 
 <script>
@@ -51,6 +46,11 @@ export default {
       return {
           image: image
       }
+  },
+  methods :{
+    changeRoute(id){
+        this.$router.push({name:id});
+    }
   }
 }
 

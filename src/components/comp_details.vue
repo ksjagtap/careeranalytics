@@ -1,29 +1,29 @@
 <template>
 <div>
   <form>
-  <div class="row">
-    <div class="col"></div>
-    <div class="col">
-      <h6>Select Company :</h6>
-      <select v-model="currCoy" class="form-control form-control-sm">
-        <option value="" selected disabled>Select Company</option>
-        <option v-for="(ind, key) in mainData" :value="key">{{key}}</option>
-      </select> </br>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        Company :
+        <select v-model="currCoy" class="form-control form-control-sm">
+          <option value="" disabled selected>Select Company</option>
+          <option v-for="(ind, key) in mainData" :value="key">{{key}}</option>
+        </select> </br>
+      </div>
+      <div class="col">
+        Position in Company :
+        <select v-model="currPos" class="form-control form-control-sm">
+          <option value="" disabled selected>Select Company First</option>
+          <option v-for="Pos in dynamicPositions" :value="Pos">{{Pos}}</option>
+        </select> </br>
+      </div>
+      <div class="col"></div>
     </div>
-    <div class="col">
-      <h6>Select Position in Company :</h6>
-      <select v-model="currPos" class="form-control form-control-sm">
-        <option value="" selected disabled>Select Company First</option>
-        <option v-for="Pos in dynamicPositions" :value="Pos">{{Pos}}</option>
-      </select> </br>
-    </div>
-    <div class="col"></div>
-  </div>
-</form>
+  </form>
 
   <h3>Showing Statistics for {{currPos}} in {{currCoy}}</h3>
 
-  <b-container fluid class="border border-info">
+  <b-container fluid>
    <b-row>
      <b-col cols="3">
        <b-list-group v-b-scrollspy:listgroup-ex>
@@ -93,8 +93,8 @@ from '../firebase.js'
 export default {
     data: function() {
         return {
-            currCoy: "-",
-            currPos: "-",
+            currCoy: "",
+            currPos: "",
             dynamicPositions: [],
             hiringTrend: [] , // [year, number]
             capDist:  [],
@@ -141,7 +141,7 @@ export default {
         AmCharts.makeChart("salaryChart", {
         "type": "serial",
         "theme": "light",
-        "columnWidth": 1, 
+        "columnWidth": 1,
         "dataProvider": this.salary,
         "graphs": [{
           "fillColors": "#337FFF",
@@ -169,7 +169,9 @@ export default {
 
         getPosition: function(val){
           var company = this.mainData[val];
-          return company["Positions"];
+          var result = company["Positions"]
+          result.sort()
+          return result;
         },
 
         getSelectedData: function(){
@@ -196,9 +198,10 @@ export default {
               // might have a gap in the graph
               // would want to account for 15, loop through once
               for(var i = 0; i < Number(year)-Number(currYear); i++){
-                result.push([String(Number(year)+1+i),0]);
+                result.push([String(Number(currYear)+i),0]);
               }
             }
+            currYear = year;
             result.push([year,data[year]]);
           }
           return result;
@@ -217,7 +220,7 @@ export default {
           data.sort();
           var result = [];
           var currCount = 0;
-          var startCap = 1.5;
+          var startCap = Math.floor(data[0]/0.25)/4 - 0.5;
           for(var cap in data){
             var currCap = data[cap];
 
@@ -267,11 +270,15 @@ export default {
             };
             result.push(capDict);
           }
+          var capDict = {
+            "category": "",
+            "count": 0
+          };
+          result.push(capDict);
           return result;
         },
 
         getSalary: function(){
-          var startSalary = 1000;
           // Histogram
           // Has to be in the format:
           // [{
@@ -286,6 +293,7 @@ export default {
           var currCount = 0;
           var data = this.getSelectedData()["Salaries"];
           data.sort();
+          var startSalary = Math.floor(data[0]/500)*500 - 500;
           for(var salary in data){
             var currSalary = data[salary];
 
@@ -325,6 +333,11 @@ export default {
           var salDict = {
             "category": startSalary,
             "count": currCount
+          }
+          result.push(salDict);
+          var salDict = {
+            "category": startSalary+500,
+            "count": 0
           }
           result.push(salDict);
           return result;

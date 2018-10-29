@@ -17,6 +17,8 @@ import VueCharts from 'vue-charts'
 import cBM_Industries from './components/cBM_Industries.vue'
 import comp_details from './components/comp_details.vue'
 import I_O_overview from './components/I_O_overview.vue'
+import intern_det from './components/intern_det.vue'
+import comp_int from './components/comp_int.vue'
 
 Vue.config.productionTip = false
 
@@ -29,10 +31,11 @@ Vue.use(router)
 Vue.use(BootstrapVue)
 Vue.use(VueCharts);
 
-
 Vue.component('app-I_O_overview', I_O_overview)
 Vue.component('app-cbm_industries', cBM_Industries);
 Vue.component('app-comp-details', comp_details);
+Vue.component('app-intern-det', intern_det);
+Vue.component('app-comp-int', comp_int);
 
 /* eslint-disable no-new */
 new Vue({

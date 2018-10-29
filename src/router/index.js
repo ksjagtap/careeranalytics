@@ -9,6 +9,9 @@ import COMPARE_COMPANIES from '../components/COMPARE_COMPANIES.vue'
 import INDUSTRY_OUTLOOK from '../components/INDUSTRY_OUTLOOK.vue'
 import SIGNUP from '../components/signup_page.vue'
 import LOGIN from '../components/login.vue'
+import COMPARE_INTERNSHIPS from '../components/COMPARE_INTERNSHIPS.vue'
+import INTERNSHIP_DETAILS from '../components/INTERNSHIP_DETAILS.vue'
+import EXPLORE from '../components/explore.vue'
 
 // another way to do it
 //import INDUSTRY_OUTLOOK from '../components/INDUSTRY_OUTLOOK.vue'
@@ -65,5 +68,23 @@ export default new Router({
       name: 'LOGIN',
       component: LOGIN
     },
+
+    {
+      path: '/compareinternships',
+      name: 'COMPARE_INTERNSHIPS',
+      component: COMPARE_INTERNSHIPS
+    },
+
+    {
+      path: '/internshipdetails',
+      name: 'INTERNSHIP_DETAILS',
+      component: INTERNSHIP_DETAILS
+    },
+
+    {
+      path: '/explore',
+      name: 'EXPLORE',
+      component: EXPLORE
+    }
   ]
 })
