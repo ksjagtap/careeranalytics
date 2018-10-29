@@ -99,6 +99,28 @@ export default {
           this.dynamicSalBins = this.getSalary(val);
           this.dynamicGrads = this.getGradsInMajor(val);
           this.isHidden=true;
+          AmCharts.makeChart("salChart", {
+        "type": "serial",
+        "theme": "light",
+        "columnWidth": 1,
+        "dataProvider": this.dynamicSalBins,
+        "graphs": [{
+          "fillColors": "#337FFF",
+          "fillAlphas": 0.9,
+          "lineColor": "#fff",
+          "lineAlpha": 0.7,
+          "type": "column",
+          "valueField": "count"
+        }],
+        "categoryField": "category",
+        "categoryAxis": {
+          "startOnAxis": true,
+          "title": "Try"
+        },
+        "valueAxes": [{
+          "title": "Count"
+        }]
+      });
         }
     },
 
@@ -187,7 +209,7 @@ export default {
       graduates: {
         source: db.ref('graduate').child('data'),
         asObject: true,
-      }
+      },
     },
 
     methods: {
@@ -266,40 +288,65 @@ export default {
       },
 
       getSalary: function(val){
-        var arr = new Set();
+        var arr = [];
         var sal = 0;
         var grads = this.grads();
         for(var grad in grads){
           if (grads[grad]["Faculty (First Major)"] === val){
-            arr.add(grads[grad]["Salary"]);
-            if (grads[grad]["Salary"] >= sal){
-              sal = grads[grad]["Salary"];
-              // console.log("max sal", sal)
-            }
+            arr.push(grads[grad]["Salary"]);
           }
         }
+        arr.sort();
+        var currCount = 0;
+        var result = [];
+        var startSalary = Math.floor(arr[0]/500)*500 - 500;
+        for(var salary in arr){
+          var currSalary = arr[salary];
 
-        var minSal = 999999;
-        for(var grad in grads){
-          if (grads[grad]["Faculty (First Major)"] === val){
-            arr.add(grads[grad]["Salary"]);
-            if (grads[grad]["Salary"] <= minSal){
-              minSal = grads[grad]["Salary"];
-              // console.log("MIN SAL", minSal);
+          // Just skip if salary below 1000
+          if(currSalary < 1000){
+            continue;
+          }
+
+          // If this salary is still within the bin, add to count
+          if(currSalary < startSalary + 500){
+            currCount++;
+          } else{
+
+            // Salary is out of the bin already, time to add to count
+            var salDict = {
+              "category": startSalary,
+              "count": currCount
+            };
+            result.push(salDict);
+            currCount = 0;
+
+            // While current salary is two bins before, initiate to zero
+            // When exits, that will be the correct bin and we will need
+            // to instantiate the count to 1
+            while(currSalary - 1000 >= startSalary){
+              startSalary += 500;
+              var salDict = {
+                "category": startSalary,
+                "count": currCount
+              };
+              result.push(salDict);
             }
+            startSalary += 500;
+            currCount = 1;
           }
         }
-
-        var bins = Math.ceil(sal/1000);
-        var start = Math.floor(minSal/1000);
-        // console.log("START", start);
-        var arrBins = new Set();
-          for (var i = start; i <= bins; i++){
-            arrBins.add(i);
-          }
-          let array = Array.from(arrBins);
-          // console.log(array);
-          return array;
+        var salDict = {
+          "category": startSalary,
+          "count": currCount
+        }
+        result.push(salDict);
+        var salDict = {
+          "category": startSalary+500,
+          "count": 0
+        }
+        result.push(salDict);
+        return result;
         },
 
       /*renderChart () {
