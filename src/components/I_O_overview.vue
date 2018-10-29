@@ -14,7 +14,7 @@
         :rows="rowsReal"
         :options="options"
       ></vue-chart></vue-chart>
-      
+
       </div>
 
 
@@ -27,7 +27,7 @@
       </div>
         <br>
         <h2> Job Over Years </h2>
-        <line-chart 
+        <line-chart
             :data="jobPerYear"
             :legend="true">
         </line-chart>
@@ -46,13 +46,13 @@
       border: 0;
       border-top: 1px solid #ccc;
       margin: 1em 0;
-      padding: 0; 
+      padding: 0;
       color: #333;
   }
 </style>
 
 <script>
-import {db} from '../firebase.js';  
+import {db} from '../firebase.js';
 import Vue from 'vue'
 
 //var chart;
@@ -66,7 +66,7 @@ export default {
 
         options:
               {
-                title: 'Industries Overview',
+                title: 'Graduate Hiring Trend By Industries',
                 hAxis: {
                     title: 'Year',
                     minValue: '2014',
@@ -127,7 +127,7 @@ export default {
             res.push({'type':'number', 'label': industry})
             console.log("PUSHED")
           }
-          
+
         }
         return res
       },
@@ -140,7 +140,7 @@ export default {
           industryIndexes[industryName] = index-1;
         }
 
-        var rows = [["2014", 0,0,0,0,0,0,0,0], ["2015",0,0,0,0,0,0,0,0], 
+        var rows = [["2014", 0,0,0,0,0,0,0,0], ["2015",0,0,0,0,0,0,0,0],
         ["2016",0,0,0,0,0,0,0,0], ["2017",0,0,0,0,0,0,0,0]];
 
         var grads = this.grads()
@@ -158,12 +158,12 @@ export default {
 
         return rows
       }
-    }, 
+    },
 
     methods: {
       grads: function(){
         return this.graduates;
-      }, 
+      },
 
       industry: function(){
         return this.industries;
@@ -192,7 +192,7 @@ export default {
         let array = Array.from(arr);
         return array;
       },
-    }, 
+    },
 
     firebase: {
       industries: {
@@ -215,7 +215,7 @@ import Firebase from 'firebase'
 import {db} from '../firebase.js'
 
 
- 
+
 
     computed: {
       grads() {
@@ -298,10 +298,7 @@ import {db} from '../firebase.js'
 
 
     },
-      
-    
+
+
   }
 </script>!-->
-
-
-

@@ -139,7 +139,7 @@ export default {
         "categoryField": "category",
         "categoryAxis": {
           "startOnAxis": true,
-          "title": "Try"
+          "title": "CAP"
         },
         "valueAxes": [{
           "title": "Count"
@@ -161,7 +161,7 @@ export default {
         "categoryField": "category",
         "categoryAxis": {
           "startOnAxis": true,
-          "title": "Try"
+          "title": "Salary"
         },
         "valueAxes": [{
           "title": "Count"
