@@ -2,13 +2,12 @@
   <div id="app">
     <img :src="image" alt="NUSCareersLogo" height="45" width="170" align='left'>
     <b-tabs>
-      <b-tab title="Profile" active> </br>
+      <b-tab title="Profile" active @click="changeRoute('PROFILE')"> </br>
       </b-tab>
       <b-tab title="Explore" @click="changeRoute('EXPLORE')"> </br>
         <router-link to='/explore' hidden=true> <button type="button" class="btn btn-primary">Explore</button> </router-link>
       </b-tab>
       <b-tab title="Jobs" @click="changeRoute('CAREERS_BY_MAJOR')"> </br>
-        <router-link to='/profile'> <button type="button" class="btn btn-primary">Profile</button> </router-link>
         <router-link to='/careersByMajor'><button type="button" class="btn btn-primary">Careers By Major</button></router-link>
         <router-link to='/industryoutlook'> <button type="button" class="btn btn-primary">Industry Outlook</button> </router-link>
         <router-link to='/comparecompanies'> <button type="button" class="btn btn-primary">Compare Companies</button> </router-link>

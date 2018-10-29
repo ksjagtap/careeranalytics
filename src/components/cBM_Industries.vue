@@ -1,52 +1,77 @@
 <template>
   <div>
-    <div>
-      <select type="text" v-model="searchByMajor" placeholder="Search By Major" >
-        <option value="" disabled selected>Select Major</option>
-        <option v-for="maj in majors" :value="maj">{{maj}}</option>
-      </select> </br>
-    </div>
-      <h2> Industries </h2>
-    <column-chart :data="indStats"></column-chart>
+    <form>
+      <div class="row">
+        <div class="col"></div>
+        <div class="col">
+          Major :
+          <select type="text" v-model="searchByMajor" placeholder="Search By Major" class="form-control form-control-sm">
+            <option value="" disabled selected>Select Major</option>
+            <option v-for="maj in majors" :value="maj">{{maj}}</option>
+          </select> </br>
+        </div>
+        <div class="col"></div>
+      </div>
+    </form>
 
-    <h2> Job Positions </h2>
-    <column-chart :data="jobStats"></column-chart> 
+    <h3>Showing Statistics for {{searchByMajor}}</h3>
 
-    <h2> Salary </h2>
-    <h2> CANT PLOT HISTOGRAM T___T </h2>
+    <b-container fluid>
+     <b-row>
+       <b-col cols="3">
+         <b-list-group v-b-scrollspy:listgroup-ex>
+         </br>
+         </br>
+           <b-list-group-item href="#list-item-1">Industries</b-list-group-item>
+           <b-list-group-item href="#list-item-2">Job Position</b-list-group-item>
+           <b-list-group-item href="#list-item-3">Salaries</b-list-group-item>
+         </b-list-group>
+       </b-col>
+       <b-col cols="9">
+         <div v-if="!isHidden">
+           <h1> Please Select Major </h1>
+         </br>
+         </br>
+         </br>
+         </br>
+         </br>
+         </br>
+         </br>
+         </br>
+         </br>
+         </br>
+         </br>
+         </br>
+         </br>
+         </br>
+         </br>
+         </div>
+         <div id="listgroup-ex" style="position:relative;overflow-y:auto;height:400px">
+           <h4 id="list-item-1">Industries</h4>
+           <column-chart :data="indStats"></column-chart>
 
-    <line-chart :data="salStats"
-                  :library="{scales: {xAxes: [{display: false,
-                ticks: {
-                  max: dynamicSalBins[-1],
-                }
-              }, {scaleLabel:{
-                display: true,
-                labelString: 'Salary(By Thousands)',
-              },
-                ticks: {
-                    autoSkip: false,
-                  max: dynamicSalBins[-1],
-                  
-                }, 
-              }], yAxes: [{
-                scaleLabel:{
-                  display: true,
-                  labelString: 'Number Of Graduates'
-                },
-                ticks: {
-                  beginAtZero:true,  
-                }
-              }]}}"></line-chart>
+           <h4 id="list-item-2">Job Position</h4>
+           <column-chart :data="jobStats"></column-chart>
 
-    <!--<p> {{renderChart()}} </p>!-->
-
+           <h4 id="list-item-3">Salaries</h4>
+           <div id="salChart" style="width: 100%; height: 250px;"></div>
+         </div>
+       </b-col>
+     </b-row>
+   </b-container>
 </div>
 
 </template>
 
+<style>
+
+div {
+  position: relative;
+}
+</style>
+
 <script>
-import {db} from '../firebase.js';  
+import {db} from '../firebase.js';
 import Vue from 'vue'
 
 //var chart;
@@ -59,6 +84,7 @@ export default {
         dynamicJobForMajor: [],
         dynamicSalBins: [],
         dynamicGrads: [],
+        isHidden: false
       }
     },
 
@@ -68,18 +94,19 @@ export default {
           this.dynamicJobForMajor = this.getJobs(val);
           this.dynamicSalBins = this.getSalary(val);
           this.dynamicGrads = this.getGradsInMajor(val);
+          this.isHidden=true;
         }
     },
-    
+
     computed: {
       industry(){
         return this.industries;
       },
-      // display no of grads from selected major per industry 
+      // display no of grads from selected major per industry
       indStats(){
         var grads = this.dynamicGrads;
         var ind = this.dynamicIndForMajor;
-        const result = []; 
+        const result = [];
         //for (var i = 0; i <= this.allInd.length; i++){
         for (var i = 0; i <= ind.length; i++){
           var count = 0;
@@ -96,11 +123,11 @@ export default {
         return result.reverse();
       },
 
-      // display no of grads from selected major per job position 
+      // display no of grads from selected major per job position
       jobStats(){
         var grads = this.dynamicGrads;
         var allJobs = this.dynamicJobForMajor;
-        const result = []; 
+        const result = [];
         for (var i = 0; i <= allJobs.length; i++){
           var count = 0;
           if (allJobs[i] === undefined) { continue; }
@@ -114,7 +141,7 @@ export default {
           }
         }
         return result.reverse();
-      }, 
+      },
 
       salStats(){
         const result = [];
@@ -128,7 +155,7 @@ export default {
             }
           }
           result.push([salaryLabels[i], count]);
-          console.log("Result", result);
+          // console.log("Result", result);
           //result.push(count);
         }
         return result;
@@ -176,7 +203,7 @@ export default {
         if(count <= array[start][1]){
           array.splice(start, 0, [ind, count]);
           return;
-        } 
+        }
 
         if(start >= end){
           return;
@@ -195,7 +222,7 @@ export default {
       },
       grads: function(){
         return this.graduates;
-      }, 
+      },
 
       getIndustry: function(val){
         var arr = new Set();
@@ -243,31 +270,31 @@ export default {
             arr.add(grads[grad]["Salary"]);
             if (grads[grad]["Salary"] >= sal){
               sal = grads[grad]["Salary"];
-              console.log("max sal", sal)
+              // console.log("max sal", sal)
             }
           }
         }
 
-        var minSal = 999999; 
+        var minSal = 999999;
         for(var grad in grads){
           if (grads[grad]["Faculty (First Major)"] === val){
             arr.add(grads[grad]["Salary"]);
             if (grads[grad]["Salary"] <= minSal){
               minSal = grads[grad]["Salary"];
-              console.log("MIN SAL", minSal);
+              // console.log("MIN SAL", minSal);
             }
           }
         }
 
         var bins = Math.ceil(sal/1000);
         var start = Math.floor(minSal/1000);
-        console.log("START", start);
+        // console.log("START", start);
         var arrBins = new Set();
           for (var i = start; i <= bins; i++){
             arrBins.add(i);
           }
           let array = Array.from(arrBins);
-          console.log(array);
+          // console.log(array);
           return array;
         },
 
@@ -302,7 +329,7 @@ export default {
                 ticks: {
                     autoSkip: false,
                   max: this.dynamicSalBins.length - 1,
-                  
+
                 }
               }],
               yAxes: [{
@@ -311,7 +338,7 @@ export default {
                   labelString: 'Number Of Graduates'
                 },
                 ticks: {
-                  beginAtZero:true,  
+                  beginAtZero:true,
                 }
               }]
               }

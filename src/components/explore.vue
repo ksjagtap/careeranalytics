@@ -9,7 +9,7 @@
            <b-list-group-item href="#list-item-1">Business Analyst</b-list-group-item>
            <b-list-group-item href="#list-item-2">Data Analyst</b-list-group-item>
            <b-list-group-item href="#list-item-3">Data Scientist</b-list-group-item>
-           <b-list-group-item href="#list-item-4">Human Resource Intern</b-list-group-item>
+           <b-list-group-item href="#list-item-4">Human Resource</b-list-group-item>
            <b-list-group-item href="#list-item-5">Management Consulting Analyst</b-list-group-item>
            <b-list-group-item href="#list-item-6">Operations Analyst</b-list-group-item>
            <b-list-group-item href="#list-item-7">Software Engineer</b-list-group-item>
@@ -57,7 +57,7 @@
               <strong>Majors: Business Analytics, Business Admin with a specialisation in Business Analytics, Data Science and Analytics</strong>
               <strong>Companies: Singtel, J.P.Morgan, Morgan Stanley, Google, Facebook</strong>
            </div></br>
-           <h4 id="list-item-4">Human Resource Intern</h4>
+           <h4 id="list-item-4">Human Resource</h4>
            <div align='left'>William R. Tracey, in "The Human Resources Glossary," defines Human Resources as: "The people that staff and operate an organization," as contrasted with the financial and material resources of an organization. A human resource is a single person or employee within your organization. Human resources refer to all of the people you employ. </br></br>
              Human Resources is also the organizational function that deals with the people and issues related to people such as compensation and benefits, recruiting and hiring employees, onboarding employees, performance management, training, organization development and culture, and advising senior staff about the impact on people of their financial, planning, and performance decisions on the people in the organization.</div>
            <h4 id="list-item-5">Management Consulting Analyst</h4>
