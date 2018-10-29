@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+> View the app here: https://ksjagtap.github.io/careeranalytics/
+
 ## Build Setup
 
 ``` bash

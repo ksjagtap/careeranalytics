@@ -21,12 +21,33 @@
       <div class="col"></div>
     </div>
   </form>
-  <table align='center'>
+
+  <form>
+    Percent Composition Of Interns In Selected Year :
+    <label class="checkbox-inline">
+      <input type="checkbox" value=true v-model="showYearOne">Year 1
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" value=true v-model="showYearTwo">Year 2
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" value=true v-model="showYearThree">Year 3
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" value=true v-model="showYearFour">Year 4
+    </label>
+  </form>
+
+  <table align='center' class="table table-hover">
         <thead>
             <tr>
-                <th @click="sort('Name')" onmouseover="" style="cursor: pointer;">Name</th>
-                <th @click="sort('CAP')" onmouseover="" style="cursor: pointer;">CAP</th>
-                <th @click="sort('Allowance')" onmouseover="" style="cursor: pointer;">Allowance</th>
+                <th @click="sort('Name')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Name'">Name</th>
+                <th @click="sort('CAP')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by CAP'">CAP</th>
+                <th @click="sort('Allowance')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Allowance'">Allowance</th>
+                <th @click="sort('YearOne')" onmouseover="" style="cursor: pointer;" v-if="showYearOne" v-b-popover.hover="'Sort by Percentage of Year Ones (0.90 means 90% of interns were Year 1)'">Year One</th>
+                <th @click="sort('YearTwo')" onmouseover="" style="cursor: pointer;" v-if="showYearTwo" v-b-popover.hover="'Sort by Percentage of Year Ones (0.56 means 56% of interns were Year 2)'">Year Two</th>
+                <th @click="sort('YearThree')" onmouseover="" style="cursor: pointer;" v-if="showYearThree" v-b-popover.hover="'Sort by Percentage of Year Ones (0.44 means 44% of interns were Year 3)'">Year Three</th>
+                <th @click="sort('YearFour')" onmouseover="" style="cursor: pointer;" v-if="showYearFour" v-b-popover.hover="'Sort by Percentage of Year Ones (0.14 means 14% of interns were Year 4)'">Year Four</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +55,10 @@
                 <td>{{company.Name}}</td>
                 <td>{{company.CAP}}</td>
                 <td>{{company.Allowance}}</td>
+                <td v-if="showYearOne">{{company.YearOne}}</td>
+                <td v-if="showYearTwo">{{company.YearTwo}}</td>
+                <td v-if="showYearThree">{{company.YearThree}}</td>
+                <td v-if="showYearFour">{{company.YearFour}}</td>
             </tr>
         </tbody>
     </table>
@@ -84,7 +109,11 @@ export default {
             showCharts : false,
             tableData: [],
             currentSort : "name",
-            currentSortDir:'asc'
+            currentSortDir:'asc',
+            showYearOne: false,
+            showYearTwo: false,
+            showYearThree: false,
+            showYearFour: false,
         };
     },
     watch: {
@@ -99,7 +128,7 @@ export default {
             return;
           }
           this.tableData = this.processTableData(val);
-        }
+        },
     },
 
     methods: {
@@ -110,6 +139,17 @@ export default {
             }
           }
           return false;
+        },
+        internPercent: function(arr, year){
+          var count = 0;
+          var total = 0;
+          for(var i in arr){
+            if(arr[i] == year){
+              count++;
+            }
+            total++;
+          }
+          return (count/total).toFixed(2)
         },
         sort:function(s) {
           //if s == current sort, reverse
@@ -149,6 +189,10 @@ export default {
                 //   dict[variable] = median;
                 // }
               }
+              dict["YearOne"] = this.internPercent(coy[val]["Year"], 1);
+              dict["YearTwo"] = this.internPercent(coy[val]["Year"], 2);
+              dict["YearThree"] = this.internPercent(coy[val]["Year"], 3);
+              dict["YearFour"] = this.internPercent(coy[val]["Year"], 4);
               final.push(dict);
             }
           }
@@ -181,6 +225,10 @@ export default {
                 //   dict[variable] = median;
                 // }
               }
+              dict["YearOne"] = this.internPercent(coy[this.currPos]["Year"], 1);
+              dict["YearTwo"] = this.internPercent(coy[this.currPos]["Year"], 2);
+              dict["YearThree"] = this.internPercent(coy[this.currPos]["Year"], 3);
+              dict["YearFour"] = this.internPercent(coy[this.currPos]["Year"], 4);
               final.push(dict);
             }
           }
@@ -223,6 +271,15 @@ export default {
             }
             dict[company][position]["Allowance"] = companies[company]["Allowance"][position];
           }
+
+          for(var position in companies[company]["Year"]){
+            if(!(position in dict[company])){
+                dict[company][position] = {};
+            }
+            dict[company][position]["Year"] =  companies[company]["Year"][position];
+            positions.add(position);
+          }
+
           let array = Array.from(positions);
           dict[company]["Positions"] = array;
           dict[company]["Industry"] = industry;

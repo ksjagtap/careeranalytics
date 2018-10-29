@@ -83,4 +83,5 @@ export default {
   color: #15294C;
 }
 
+
 </style>

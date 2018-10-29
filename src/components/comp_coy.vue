@@ -58,11 +58,14 @@ th {
   background-color: #15294C;
 }
 
+tr:nth-child(even) {background-color: #f2f2f2;}
+
 td {
   border: 1px solid #999;
   padding: 0.5rem;
   text-align: center;
 }
+
 </style>
 
 <script>

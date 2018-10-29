@@ -2,7 +2,12 @@
   <div>
 
       <div>
-    
+
+<!--       {{columnsReal}}
+      <br>
+      <br>
+      {{rowsReal}}
+     -->
       <vue-chart
         chart-type="LineChart"
         :columns="columnsReal"
@@ -118,8 +123,11 @@ export default {
                  }]
 
         for (var industry in inds){
-          if (industry===".key"){break}
-          res.push({'type':'number', 'label': industry})
+          if (!(industry===".key")){
+            res.push({'type':'number', 'label': industry})
+            console.log("PUSHED")
+          }
+          
         }
         return res
       },
