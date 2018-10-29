@@ -1,5 +1,150 @@
 <template>
   <div>
+
+    <div>
+      <h2> Overview </h2>
+    </div>
+
+    <div>
+      <select type="text" v-model="searchIndustry" placeholder="Search By Major" >
+        <option value="" disabled selected>Select Industry</option>
+        <option v-for="(ind, key) in industries" :value="key">{{key}}</option>
+      </select> </br>
+    </div>
+
+    <h2> Job Over Years </h2>
+    <line-chart :data="jobPerYear"
+                :legend="true"></line-chart>
+  </div>
+
+</template>
+
+<script>
+import {db} from '../firebase.js';  
+import Vue from 'vue'
+
+//var chart;
+export default {
+    data: function() {
+      return{
+        searchIndustry: "",
+        years: ['14', '15', '16', '17'],
+        dynamicGrads: [],
+        dynamicJobs: [],
+        allInd: [],
+        databaseUrl: 'https://careeranalytics-7b367.firebaseio.com/graduate/data.json'
+      }
+    },
+    //for each industry
+    // data = [{name: 'job role', data: {2017: 3, 2016: 4, 2013: 2}}]
+    mounted: function(){
+      this.industryOverview()
+    },
+
+
+    watch: {
+      searchIndustry: function(val){
+        this.dynamicGrads = this.getGradsInIndustry(val);
+        this.dynamicJobs = this.getJobs(val);
+        this.allInd = this.getIndustry();
+      }
+    },
+
+    computed: {
+      jobPerYear(){
+        var grads = this.dynamicGrads;
+        var years = this.years;
+        var jobs = this.dynamicJobs;
+        var result = []
+        for (var i = 0; i < jobs.length; i++){
+          var dic = {};
+          dic['name'] = jobs[i];
+          console.log("Job", jobs[i]);
+          dic["data"] = {};
+          for (var j = 0; j < years.length; j++){
+            var count = 0;
+            for (var grad in grads){
+              if (grads[grad]["Job Title"] === jobs[i] && grads[grad]["Grad Year"] === years[j]){
+                count++;
+              }
+            }
+            dic['data'][years[j]] = count;
+          }
+          result.push(dic);
+          //console.log("DIC", dic);
+        }
+        //console.log("RESULT", result);
+        return result;
+      }
+    }, 
+
+    methods: {
+      grads: function(){
+        return this.graduates;
+      }, 
+
+      industry: function(){
+        return this.industries;
+      },
+
+      getIndustry: function(){
+        var arr = new Set();
+        var industries = this.industry();
+        for (var ind in industries){
+          arr.add(ind);
+          //console.log("IND", arr);
+        }
+        let array = Array.from(arr);
+        return array;
+      },
+
+      industryOverview: async function(){
+        //let inds = await axios.get(this.databaseUrl);
+        //console.log(inds);
+      },
+
+      getGradsInIndustry: function(val){
+        var arr = [];
+        var grads = this.grads();
+        for(var grad in grads){
+          if(grads[grad]["Industry"] === val){
+            arr.push(grads[grad]);
+            //console.log("GRADuatesS", arr);
+          }
+        }
+        return arr;
+      },
+
+      getJobs: function(val){
+        var arr = new Set();
+        var grads = this.grads();
+        for (var grad in grads){
+          if (grads[grad]["Industry"] === val){
+            arr.add(grads[grad]["Job Title"]);
+            //console.log("GRADuatesS", arr);
+          }
+        }
+        let array = Array.from(arr);
+        return array;
+      }, 
+
+    },
+
+    firebase: {
+      industries: {
+        source: db.ref('industries').child('data'),
+        asObject: true,
+      },
+      graduates: {
+        source: db.ref('graduate').child('data'),
+        asObject: true,
+      }
+    },
+}
+</script>
+
+<!--<template>
+  <div>
     <br>
     <vue-chart
       chart-type="LineChart"
@@ -9,16 +154,16 @@
     ></vue-chart></vue-chart>
     <br>
     <h3>Columns</h3>
-    <!-- {{ graduates }} -->
+    {{ graduates }}
     <div v-for = "(index, key) in columnsReal"> {{key}} : {{columnsReal[key]}} </div>
     
     <h3>Industries</h3>
     <div>{{rowsReal}}</div>
   </div>
-</template>
+</template>-->
 
 
-<script>
+<!--<script>
 
 import Firebase from 'firebase'
 import {db} from '../firebase.js'
@@ -119,7 +264,6 @@ import {db} from '../firebase.js'
     },
 
     methods: {
-
       populateIndustryData: async function() {
         console.log("FUNCTION CALLED ");
 
@@ -158,4 +302,7 @@ import {db} from '../firebase.js'
       
     
   }
-</script>
+</script>!-->
+
+
+
