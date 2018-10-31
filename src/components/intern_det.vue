@@ -39,22 +39,9 @@
        <b-col cols="9">
          <div v-if="!isHidden">
            <h6> Please Select Company and Position </h6>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
          </div>
+
+         <div v-show="isHidden">
          <div id="listgroup-ex" style="position:relative;overflow-y:auto;height:400px">
 
            <br>
@@ -76,6 +63,7 @@
 
            <h4 id="list-item-5"><u>Major Counts</u></h4>
            <GChart type="BarChart" :data="majors" style="width: 100%; height: 250px;"/> </br></br></br></br></br></br>
+         </div>
 
          </div>
        </b-col>
