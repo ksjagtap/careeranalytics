@@ -122,15 +122,13 @@ export default {
         return result;
       },
       columnsReal() {
-        var inds = this.industry()
+        var inds = this.industry();
         var res = [{'type': 'string',
                    'label': 'year'
-                 }]
-
+                 }];
         for (var industry in inds){
-          if (!(industry===".key")){
-            res.push({'type':'number', 'label': industry})
-            console.log("PUSHED")
+          if (industry!==".key"){
+            res.push({'type':'number', 'label': industry});
           }
 
         }
@@ -140,27 +138,27 @@ export default {
       rowsReal() {
         // store the indexes of each industry ==> which index in rows should this industry be?
         var industryIndexes = {}
-        for (var index in this.columnsReal){
-          var industryName = this.columnsReal[index]['label']
-          industryIndexes[industryName] = index-1;
-        }
 
         var rows = [["2014", 0,0,0,0,0,0,0,0], ["2015",0,0,0,0,0,0,0,0],
         ["2016",0,0,0,0,0,0,0,0], ["2017",0,0,0,0,0,0,0,0]];
+        for (var index in this.columnsReal){
+          var industryName = this.columnsReal[index]['label'];
+          industryIndexes[industryName] = index-1;
+        }
 
         var grads = this.grads()
         for (var grad in grads){
 
           var ind = grads[grad]["Industry"];
-          var year = grads[grad]["Grad Year"]
-          var index = industryIndexes[ind]
+          var year = grads[grad]["Grad Year"];
+          var index = industryIndexes[ind];
 
           if(year === "14"){rows[0][index+1]++}
-          else if(year == "15") {rows[1][index+1]++}
-          else if(year == "16") {rows[2][index+1]++}
-          else if(year == "17") {rows[3][index+1]++}
-        }
+          else if(year === "15") {rows[1][index+1]++}
+          else if(year === "16") {rows[2][index+1]++}
+          else if(year === "17") {rows[3][index+1]++}
 
+        }
         return rows
       }
     },
