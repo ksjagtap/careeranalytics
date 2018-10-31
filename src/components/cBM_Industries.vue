@@ -30,22 +30,8 @@
        <b-col cols="9">
          <div v-if="!isHidden">
            <h6> Please Select Major </h6>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
-         </br>
          </div>
+         <div v-show='isHidden'>
          <div id="listgroup-ex" style="position:relative;overflow-y:auto;height:400px">
            
           <br> 
@@ -63,6 +49,7 @@
            <br>
            <h4 id="list-item-3"><u>Salaries</u></h4>
            <div id="salChart" style="width: 100%; height: 250px;"></div>
+         </div>
          </div>
        </b-col>
      </b-row>

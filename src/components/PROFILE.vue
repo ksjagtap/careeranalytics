@@ -39,9 +39,7 @@
 
 <style>
   p {
-    text-align: center
+    text-align: center;
   }
-
-  text-align: centre
 
 </style>

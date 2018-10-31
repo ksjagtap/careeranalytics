@@ -20,6 +20,7 @@
       <div class="col"></div>
     </div>
   </form>
+  <div v-show='showCharts'>
   <table align='center' class="table table-hover">
         <thead>
             <tr>
@@ -36,6 +37,7 @@
             </tr>
         </tbody>
     </table>
+  </div>
 </div>
 
 </template>
@@ -55,7 +57,7 @@ th {
   padding: 0.5rem;
   text-align: center;
   color: #FFFFFF;
-  background-color: #337FFF;
+  background-color: #15294C;
 }
 
 tr:nth-child(even) {background-color: #f2f2f2;}

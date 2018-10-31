@@ -39,21 +39,8 @@
        <div v-if="!isHidden">
          <h6> Please Select Company and Position </h6>
        </br>
-       </br>
-       </br>
-       </br>
-       </br>
-       </br>
-       </br>
-       </br>
-       </br>
-       </br>
-       </br>
-       </br>
-       </br>
-       </br>
-       </br>
-       </div>
+      </div>
+       <div v-show='isHidden'>
        <div id="listgroup-ex" style="position:relative;overflow-y:auto;height:400px">
 
          <br>
@@ -74,7 +61,7 @@
          <br>
          <br>
          <br>
-
+        </div>
        </div>
      </b-col>
    </b-row>
@@ -88,6 +75,7 @@
 div {
   position: relative;
 }
+
 </style>
 
 <script>
@@ -113,7 +101,7 @@ export default {
     watch: {
         currCoy: function(val){
           this.dynamicPositions = this.getPosition(val);
-          this.currPos = "-";
+          this.currPos = "";
         },
         currPos: function(val){
           this.selectedData = this.getSelectedData();
@@ -138,7 +126,7 @@ export default {
         "categoryField": "category",
         "categoryAxis": {
           "startOnAxis": true,
-          "title": "Try"
+          "title": "CAP"
         },
         "valueAxes": [{
           "title": "Count"
@@ -160,7 +148,7 @@ export default {
         "categoryField": "category",
         "categoryAxis": {
           "startOnAxis": true,
-          "title": "Try"
+          "title": "Salary"
         },
         "valueAxes": [{
           "title": "Count"

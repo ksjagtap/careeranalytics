@@ -31,7 +31,7 @@
             </br></br>
             Watch A Video: <a href="">A Day In A Life of A Business Analyst</a> </br>
             <strong>Skills Required: CRM, Supplychain Knowledge</strong></br>
-              <strong>Majors: Business Analytics, Business Admin with a specialisation in Business Analytics</strong>
+              <strong>Majors: Business Analytics, Business Admin with a specialisation in Business Analytics</strong></br>
               <strong>Companies: Proctor and Gamble, Unilever, DBS</strong>
            </div></br>
            <h4 id="list-item-2">Data Analyst</h4>
@@ -61,11 +61,14 @@
            <div align='left'>William R. Tracey, in "The Human Resources Glossary," defines Human Resources as: "The people that staff and operate an organization," as contrasted with the financial and material resources of an organization. A human resource is a single person or employee within your organization. Human resources refer to all of the people you employ. </br></br>
              Human Resources is also the organizational function that deals with the people and issues related to people such as compensation and benefits, recruiting and hiring employees, onboarding employees, performance management, training, organization development and culture, and advising senior staff about the impact on people of their financial, planning, and performance decisions on the people in the organization.</div>
            <h4 id="list-item-5">Management Consulting Analyst</h4>
-           <div>Some Job Description</div>
+           <div align='left'>William R. Tracey, in "The Human Resources Glossary," defines Human Resources as: "The people that staff and operate an organization," as contrasted with the financial and material resources of an organization. A human resource is a single person or employee within your organization. Human resources refer to all of the people you employ. </br></br>
+             Human Resources is also the organizational function that deals with the people and issues related to people such as compensation and benefits, recruiting and hiring employees, onboarding employees, performance management, training, organization development and culture, and advising senior staff about the impact on people of their financial, planning, and performance decisions on the people in the organization.</div>
            <h4 id="list-item-6">Operations Analyst</h4>
-           <div>Some Job Description</div>
+           <div align='left'>William R. Tracey, in "The Human Resources Glossary," defines Human Resources as: "The people that staff and operate an organization," as contrasted with the financial and material resources of an organization. A human resource is a single person or employee within your organization. Human resources refer to all of the people you employ. </br></br>
+             Human Resources is also the organizational function that deals with the people and issues related to people such as compensation and benefits, recruiting and hiring employees, onboarding employees, performance management, training, organization development and culture, and advising senior staff about the impact on people of their financial, planning, and performance decisions on the people in the organization.</div>
            <h4 id="list-item-7">Software Engineer</h4>
-           <div>Some Job Description</div>
+           <div align='left'>William R. Tracey, in "The Human Resources Glossary," defines Human Resources as: "The people that staff and operate an organization," as contrasted with the financial and material resources of an organization. A human resource is a single person or employee within your organization. Human resources refer to all of the people you employ. </br></br>
+             Human Resources is also the organizational function that deals with the people and issues related to people such as compensation and benefits, recruiting and hiring employees, onboarding employees, performance management, training, organization development and culture, and advising senior staff about the impact on people of their financial, planning, and performance decisions on the people in the organization.</div>
          </div>
        </b-col>
      </b-row>
