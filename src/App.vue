@@ -36,7 +36,10 @@
         <button type="button" class="button btn-primary" @click="changeRoute('INDUSTRY_OUTLOOK')">Industry Outlook</button>
         <router-link to='/comparecompanies'> <button type="button" class="button btn-primary">Compare Companies</button> </router-link>
         <router-link to='/companydetails'> <button type="button" class="button btn-primary">Company Details</button></router-link>
+
+
       </b-tab>
+
       <b-tab title="Internship" @click="changeRoute('COMPARE_INTERNSHIPS')"> </br>
         <router-link to='/compareinternships'><button type="button" class="button btn-primary">Compare Internships</button></router-link>
         <router-link to='/internshipdetails'> <button type="button" class="button btn-primary">Internship Details</button></router-link>
