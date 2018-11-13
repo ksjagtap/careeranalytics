@@ -71,6 +71,6 @@ export default new Router({
       path: '/explore',
       name: 'EXPLORE',
       component: EXPLORE
-    }
+    },
   ]
 })

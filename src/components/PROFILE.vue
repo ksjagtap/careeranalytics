@@ -9,7 +9,7 @@
         <br>
       </div>
       <div align='center'>
-        <p>Name: Cool Kid</p>
+        <p>Name: Chris Boesch</p>
         <p>Faculty: Computing</p>
         <p>Major: Business Analytics</p>
         <p>Year of Study: 2</p>
@@ -20,7 +20,7 @@
 
 
 <script>
-  
+
   import image from './../profilepic.png'
 
   export default {
@@ -34,7 +34,7 @@
       console.log("Mounted")
     }
   }
-  
+
 </script>
 
 <style>

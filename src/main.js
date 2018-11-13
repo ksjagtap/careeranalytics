@@ -18,9 +18,12 @@ import comp_details from './components/comp_details.vue'
 import I_O_overview from './components/I_O_overview.vue'
 import intern_det from './components/intern_det.vue'
 import comp_int from './components/comp_int.vue'
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
 
 Vue.config.productionTip = false
 
+Vue.use(VueMaterial)
 Vue.use(VueGoogleCharts);
 Vue.use(AmCharts);
 Vue.use(AmSerial);
