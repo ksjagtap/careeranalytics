@@ -10,7 +10,7 @@
      -->
       <vue-chart
         chart-type="LineChart"
-        :columns="columnsReal"
+        :columns="columnsReal_f"
         :rows="rowsReal"
         :options="options"
       ></vue-chart>
@@ -73,7 +73,6 @@ export default {
         dynamicGrads: [],
         dynamicJobs: [],
         isHidden: true,
-        rowsReal: [],
         options:
               {
                 title: 'Graduate Hiring Trend By Industries',
@@ -135,7 +134,6 @@ export default {
       },
 
       columnsReal() {
-        console.log("Forced");
         var inds = this.industry;
         var res = [{'type': 'string',
                    'label': 'year'
@@ -149,7 +147,17 @@ export default {
         return res
       },
 
-      rowssReal() {
+      columnsReal_f() {
+        var res = [{'type': 'string',
+                   'label': 'year'
+                 }, {'type':'number', 'label': "Accounting and Auditing"}, {'type':'number', 'label': "Banking and Finance"},
+                 {'type':'number', 'label': "Consulting"}, {'type':'number', 'label': "FMCG"},
+                 {'type':'number', 'label': "Government"}, {'type':'number', 'label': "Legal"},
+                 {'type':'number', 'label': "Oil and Gas"}, {'type':'number', 'label': "Technology and Internet"}];
+        return res
+      },
+
+      rowsReal() {
         // store the indexes of each industry ==> which index in rows should this industry be?
         var industryIndexes = {}
 
@@ -173,10 +181,7 @@ export default {
           else if(year === "17") {rows[3][index+1]++}
 
         }
-        this.rowsReal = rows;
-        vm.$forceUpdate();
-        console.log("Forced");
-        return;
+        return rows;
       }
     },
 

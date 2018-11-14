@@ -61,7 +61,6 @@ export default {
   methods :{
     changeRoute(id){
         this.$router.push({name:id});
-        console.log("Changed to " + id);
         this.inIntern = false;
         this.inJob = false;
     },
@@ -73,7 +72,6 @@ export default {
         return
       } else {
         this.$router.push({name:id});
-        console.log("Changed to " + id);
         this.inIntern = false;
         this.inJob = true;
       }
@@ -86,7 +84,6 @@ export default {
         return
       } else {
         this.$router.push({name:id});
-        console.log("Changed to " + id);
         this.inJob = false;
         this.inIntern = true;
       }
@@ -113,10 +110,40 @@ export default {
   border: 4px solid #15294C;
 }
 
+.button:active:focus:target {
+  color: #7D7A9A !important;
+  background-color: #7D7A9A !important;
+}
+
 .md-button {
   color: #FFFFFF;
   background-color: #15294C;
   width: 100% !important;
+}
+
+.md-button:active:focus:target {
+  color: #7D7A9A !important;
+  background-color: #7D7A9A !important;
+}
+
+.a:active:target:focus {
+  color: #7D7A9A !important;
+  background-color: #7D7A9A !important;
+}
+
+.router-link-exact-active {
+  color: #7D7A9A !important;
+  background-color: #7D7A9A !important;
+}
+
+.is-active {
+  color: #7D7A9A !important;
+  background-color: #7D7A9A !important;
+}
+
+.md-btn--active {
+  color: #7D7A9A !important;
+  background-color: #7D7A9A !important;
 }
 
 #tabs {

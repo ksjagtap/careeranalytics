@@ -21,9 +21,7 @@
       <div class="col"></div>
     </div>
   </form>
-
-  <h6 v-show="!showCharts"> Please Select Position and Industry </h6>
-  <form v-show="showCharts">
+  <form>
 
     Percent Composition Of Interns In Selected Year :
     <label class="checkbox-inline">
@@ -40,19 +38,19 @@
     </label>
   </form>
 
-  <table v-show="showCharts" align='center' class="table table-hover">
+  <table align='center' class="table table-hover">
         <thead>
             <tr>
                 <th @click="sort('Name')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Name'">Name</th>
-                <th @click="sort('CAP')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by CAP'">CAP</th>
+                <th @click="sort('CAP')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Median CAP'">CAP</th>
                 <th @click="sort('Allowance')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Allowance'">Allowance</th>
                 <th @click="sort('YearOne')" onmouseover="" style="cursor: pointer;" v-if="showYearOne" v-b-popover.hover="'Sort by Percentage of Year Ones (0.90 means 90% of interns were Year 1)'">Year One</th>
-                <th @click="sort('YearTwo')" onmouseover="" style="cursor: pointer;" v-if="showYearTwo" v-b-popover.hover="'Sort by Percentage of Year Ones (0.56 means 56% of interns were Year 2)'">Year Two</th>
-                <th @click="sort('YearThree')" onmouseover="" style="cursor: pointer;" v-if="showYearThree" v-b-popover.hover="'Sort by Percentage of Year Ones (0.44 means 44% of interns were Year 3)'">Year Three</th>
-                <th @click="sort('YearFour')" onmouseover="" style="cursor: pointer;" v-if="showYearFour" v-b-popover.hover="'Sort by Percentage of Year Ones (0.14 means 14% of interns were Year 4)'">Year Four</th>
+                <th @click="sort('YearTwo')" onmouseover="" style="cursor: pointer;" v-if="showYearTwo" v-b-popover.hover="'Sort by Percentage of Year Twos (0.56 means 56% of interns were Year 2)'">Year Two</th>
+                <th @click="sort('YearThree')" onmouseover="" style="cursor: pointer;" v-if="showYearThree" v-b-popover.hover="'Sort by Percentage of Year Threes (0.44 means 44% of interns were Year 3)'">Year Three</th>
+                <th @click="sort('YearFour')" onmouseover="" style="cursor: pointer;" v-if="showYearFour" v-b-popover.hover="'Sort by Percentage of Year Fours (0.14 means 14% of interns were Year 4)'">Year Four</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody v-show="showCharts">
             <tr v-for= "company in sortedTable">
                 <td>{{company.Name}}</td>
                 <td>{{company.CAP}}</td>
@@ -170,6 +168,10 @@ export default {
             return Math.round((values[half-1] + values[half]) / 2.0 * 100) / 100;
           }
         },
+        minCAP: function(values) {
+          [].slice.call(values).sort( function(a,b) {return a - b;} );
+          return values[0];
+        },
         calTableData: function(val) {
           //This one calculates solely based on positions, ALL industries
           var final = [];
@@ -184,6 +186,9 @@ export default {
                 var variable = arr[a];
                 let values = coy[val][variable];
                 let median = this.median(values);
+                if(variable == "CAP"){
+                  dict["minCAP"] = this.minCAP(values);
+                }
                 dict[variable] = median;
                 // if(median == 0){
                 //   dict[variable] = "NA";
