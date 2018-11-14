@@ -105,14 +105,14 @@ export default {
 }
 
 .button {
-  background-color: #15294C;
+  background-color: #15294C!important;
   border-radius: 4px;
-  border: 4px solid #15294C;
+  border: 4px solid #15294C!important;
 }
 
 .md-button {
   color: #FFFFFF;
-  background-color: #15294C;
+  background-color: #15294C!important;
   width: 100% !important;
 }
 
