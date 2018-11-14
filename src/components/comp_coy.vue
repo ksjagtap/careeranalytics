@@ -20,7 +20,7 @@
       <div class="col"></div>
     </div>
   </form>
-  <div v-show='showCharts'>
+  <div>
   <table align='center' class="table table-hover">
         <thead>
             <tr>
@@ -29,7 +29,7 @@
                 <th @click="sort('Salaries')" onmouseover="" style="cursor: pointer;">Salary</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody v-show='showCharts'>
             <tr v-for= "company in sortedTable">
                 <td>{{company.Name}}</td>
                 <td>{{company.CAP}}</td>

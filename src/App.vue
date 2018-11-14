@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div>
-    <strong><font face = "Garamond"><h1 align="left">NUSCareers</h1></font></strong>
+    <strong><font face = "Garamond"><h1 align="center">NUSCareers</h1></font></strong>
     </div>
     <div id="tabs">
     <md-tabs class="md-primary" md-alignment="fixed">
@@ -28,9 +28,7 @@
       </md-tab>
     </md-tabs>
     </div>
-    <div>
     <router-view></router-view>
-    </div>
   </div>
 </template>
 

@@ -1,8 +1,6 @@
 <template>
 
   <div>
-    <br>
-    <br>
     <h2> Industry Outlook </h2>
     <app-I_O_overview></app-I_O_overview>
   </div>
