@@ -33,8 +33,8 @@
          </div>
          <div v-show='isHidden' style="position:relative;">
          <div id="listgroup-ex" style="position:relative;overflow-y:auto;height:400px">
-           
-          <br> 
+
+          <br>
            <h4 id="list-item-1"><u>Industries</u></h4>
            <column-chart :data="indStats"></column-chart>
 
@@ -113,7 +113,7 @@ export default {
         "categoryField": "category",
         "categoryAxis": {
           "startOnAxis": true,
-          "title": "Try"
+          "title": "Salary ($)"
         },
         "valueAxes": [{
           "title": "Count"

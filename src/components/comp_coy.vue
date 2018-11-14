@@ -24,9 +24,9 @@
   <table align='center' class="table table-hover">
         <thead>
             <tr>
-                <th @click="sort('Name')" onmouseover="" style="cursor: pointer;">Name</th>
-                <th @click="sort('CAP')" onmouseover="" style="cursor: pointer;">CAP</th>
-                <th @click="sort('Salaries')" onmouseover="" style="cursor: pointer;">Salary</th>
+                <th @click="sort('Name')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Name'">Name</th>
+                <th @click="sort('CAP')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Median CAP'">CAP</th>
+                <th @click="sort('Salaries')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Median Salary'">Salary</th>
             </tr>
         </thead>
         <tbody v-show='showCharts'>

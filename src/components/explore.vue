@@ -126,9 +126,6 @@ div {
   position: relative;
 }
 
-b-nav-item > .active{
-  color: red;
-}
 </style>
 
 <script>
