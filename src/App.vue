@@ -105,19 +105,19 @@ export default {
 }
 
 .button {
-  background-color: #15294C!important;
-  border-radius: 4px;
-  border: 4px solid #15294C!important;
+  background-color: #15294C !important;
+  border-radius: 4px !important;
+  border: 4px solid #15294C !important;
 }
 
 .md-button {
-  color: #FFFFFF;
-  background-color: #15294C!important;
+  color: #FFFFFF !important;
+  background-color: #15294C !important;
   width: 100% !important;
 }
 
 #tabs {
-  padding: 0;
+  padding: 0 !important;
   width:100%!important;
   background: linear-gradient(180deg, #15294C 48px, #FFFFFF 50px);
 }
