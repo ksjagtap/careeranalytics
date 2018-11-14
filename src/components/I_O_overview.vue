@@ -10,7 +10,7 @@
      -->
       <vue-chart 
         chart-type="LineChart"
-        :columns="columnsReal"
+        :columns="columnsReal_f"
         :rows="rowsReal"
         :options="options"
       ></vue-chart>
@@ -137,6 +137,16 @@ export default {
           }
 
         }
+        return res
+      },
+
+      columnsReal_f() {
+        var res = [{'type': 'string',
+                   'label': 'year'
+                 }, {'type':'number', 'label': "Accounting and Auditing"}, {'type':'number', 'label': "Banking and Finance"},
+                 {'type':'number', 'label': "Consulting"}, {'type':'number', 'label': "FMCG"},
+                 {'type':'number', 'label': "Government"}, {'type':'number', 'label': "Legal"},
+                 {'type':'number', 'label': "Oil and Gas"}, {'type':'number', 'label': "Technology and Internet"}];
         return res
       },
 
