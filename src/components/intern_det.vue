@@ -37,7 +37,7 @@
          </b-list-group>
        </b-col>
        <b-col cols="9">
-         <div v-if="!isHidden">
+         <div v-if="!isHidden" style="right:200px">
            <h6> Please Select Company and Position </h6>
          </div>
 

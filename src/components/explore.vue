@@ -34,6 +34,8 @@
               <strong>Majors: Business Analytics, Business Admin with a specialisation in Business Analytics</strong></br>
               <strong>Companies: Proctor and Gamble, Unilever, DBS</strong>
            </div></br>
+           <br>
+           <br>
            <h4 id="list-item-2">Data Analyst</h4>
            <div align = 'left'>
               Data analysis is a process of inspecting, cleansing, transforming, and modeling data with the goal of discovering useful information, informing conclusions, and supporting decision-making. Data analysis has multiple facets and approaches, encompassing diverse techniques under a variety of names, while being used in different business, science, and social science domains. </br></br>
@@ -45,6 +47,8 @@
               <strong>Majors: Business Analytics, Business Admin with a specialisation in Business Analytics, Data Science and Analytics</strong>
               <strong>Companies: Singtel, J.P.Morgan, Morgan Stanley, Google, Facebook, LinkedIn</strong>
            </div></br>
+           <br>
+           <br>
            <h4 id="list-item-3">Data Scientist</h4>
            <div align='left'>Data science is an interdisciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from data in various forms, both structured and unstructured, similar to data mining.
               Data science is a "concept to unify statistics, data analysis, machine learning and their related methods" in order to "understand and analyze actual phenomena" with data. It employs techniques and theories drawn from many fields within the context of mathematics, statistics, information science, and computer science.
@@ -57,18 +61,54 @@
               <strong>Majors: Business Analytics, Business Admin with a specialisation in Business Analytics, Data Science and Analytics</strong>
               <strong>Companies: Singtel, J.P.Morgan, Morgan Stanley, Google, Facebook</strong>
            </div></br>
+           <br>
+           <br>
            <h4 id="list-item-4">Human Resource</h4>
            <div align='left'>William R. Tracey, in "The Human Resources Glossary," defines Human Resources as: "The people that staff and operate an organization," as contrasted with the financial and material resources of an organization. A human resource is a single person or employee within your organization. Human resources refer to all of the people you employ. </br></br>
-             Human Resources is also the organizational function that deals with the people and issues related to people such as compensation and benefits, recruiting and hiring employees, onboarding employees, performance management, training, organization development and culture, and advising senior staff about the impact on people of their financial, planning, and performance decisions on the people in the organization.</div>
+             Human Resources is also the organizational function that deals with the people and issues related to people such as compensation and benefits, recruiting and hiring employees, onboarding employees, performance management, training, organization development and culture, and advising senior staff about the impact on people of their financial, planning, and performance decisions on the people in the organization.
+
+              Watch A Video: <a href="">A Day In A Life of A Human Resource Manager</a> </br>
+              <strong>Skills Required: Interpersonal Skills, Microsoft Skills, Teamwork, Management</strong></br>
+              <strong>Majors: Business Admin with a specialisation in Human Resources, Human Resources Diploma</strong>
+              <strong>Companies: Most, if not all</strong></div>
+              <br>
+              <br>
+              <br>
            <h4 id="list-item-5">Management Consulting Analyst</h4>
-           <div align='left'>William R. Tracey, in "The Human Resources Glossary," defines Human Resources as: "The people that staff and operate an organization," as contrasted with the financial and material resources of an organization. A human resource is a single person or employee within your organization. Human resources refer to all of the people you employ. </br></br>
-             Human Resources is also the organizational function that deals with the people and issues related to people such as compensation and benefits, recruiting and hiring employees, onboarding employees, performance management, training, organization development and culture, and advising senior staff about the impact on people of their financial, planning, and performance decisions on the people in the organization.</div>
+           <div align='left'>Management consulting analysts, often called management consultants, propose ways to improve an organization's efficiency. They advise managers on how to make organizations more profitable through reduced costs and increased revenues. </br></br>
+          Although some management analysts work for the organization that they are analyzing, most work as consultants on a contractual basis. Whether they are self-employed or part of a large consulting company, the work of a management analyst may vary from project to project. Some projects require a team of consultants, each specializing in one area. In other projects, consultants work independently with the client organization's managers.
+          Management analysts often specialize in certain areas, such as inventory management or reorganizing corporate structures to eliminate duplicate and nonessential jobs. Some consultants specialize in a specific industry, such as healthcare or telecommunications. In government, management analysts usually specialize by type of agency.
+          Organizations hire consultants to develop strategies for entering and remaining competitive in the electronic marketplace.
+          Watch A Video: <a href="">A Day In A Life of A Management Consulting Analyst</a> </br>
+          <strong>Skills Required: Interpersonal Skills, Microsoft Skills, Teamwork, Management</strong></br>
+           <strong>Marketing, Finance, Management</strong>
+           <strong>Companies: Most, if not all</strong>
+           <br>
+           <br>
+           <br>
+           </div>
            <h4 id="list-item-6">Operations Analyst</h4>
-           <div align='left'>William R. Tracey, in "The Human Resources Glossary," defines Human Resources as: "The people that staff and operate an organization," as contrasted with the financial and material resources of an organization. A human resource is a single person or employee within your organization. Human resources refer to all of the people you employ. </br></br>
-             Human Resources is also the organizational function that deals with the people and issues related to people such as compensation and benefits, recruiting and hiring employees, onboarding employees, performance management, training, organization development and culture, and advising senior staff about the impact on people of their financial, planning, and performance decisions on the people in the organization.</div>
+           <div align='left'>Operations Analysts identify the defects in business models and operations. They conduct research, investigate workflows, business procedures, and recommend changes. These analysts work to ensure that companies are following compliance standards and regulations. Analysts work to improve a company’s productivity and revenue making procedures.Operations analysts conduct internal audits. They coordinate with every department, meet with managers, and assess their work processes. Where there are deficiencies, they suggest changes and prepare reports for executive and operations managers. Analysts are mathematically inclined, as they have to develop, generate, and review statistics, graphs, and numeric data.  
+           An operations analyst's responsibilities include providing data assessments and measuring performance to support a particular strategy or direction the company is taking or wants to take. For example, a sales team operations analyst supports a sales department by providing reports, graphs and other analysis on monthly sales figures. The data provided indicate goals met, goals missed and areas needing improvement. The analyst may also perform competitive research, track trends, be required to manage databases, integrate multiple sources of data, and prepare business reviews and presentations.</br></br>
+          Watch A Video: <a href="">A Day In A Life of A Management Consulting Analyst</a> </br>
+          <strong>Skills Required: Interpersonal Skills, Microsoft Skills, Teamwork, Management</strong></br>
+           <strong>Marketing, Finance, Management, Analytics, Statistics</strong>
+           <strong>Companies: Most, if not all</strong>
+           <br>
+           <br>
+           <br>
+           </div>
            <h4 id="list-item-7">Software Engineer</h4>
-           <div align='left'>William R. Tracey, in "The Human Resources Glossary," defines Human Resources as: "The people that staff and operate an organization," as contrasted with the financial and material resources of an organization. A human resource is a single person or employee within your organization. Human resources refer to all of the people you employ. </br></br>
-             Human Resources is also the organizational function that deals with the people and issues related to people such as compensation and benefits, recruiting and hiring employees, onboarding employees, performance management, training, organization development and culture, and advising senior staff about the impact on people of their financial, planning, and performance decisions on the people in the organization.</div>
+           <div align='left'>Every business that generates its own computer programs or needs to personalize third-party software needs software engineers to write, edit and test programs. There are many layers of computer software, and each requires a specialist in languages specific to that layer. Software engineering is a rapidly changing field: training in software is available at nearly all learning institutions, and most software engineers continue to learn on the job, as languages and development environments evolve.
+            Software engineers tend to specialize in a few areas of development, such as networks, operating systems, databases or applications, and each area requires fluency in its own set of computer languages and development environments. A small percentage of software engineers work alone, but most collaborate with other specialists in development groups all working together to create complex projects.</br></br>
+          Watch A Video: <a href="">A Day In A Life of A Management Consulting Analyst</a> </br>
+          <strong>Skills Required: Programming Languages proficiency, analytics</strong></br>
+           <strong>Computer Science, Mathematics, Science</strong>
+           <strong>Companies: Garena, Google, Facebook, Amazon, LinkedIn</strong>
+           <br>
+           <br>
+           <br>
+          </div>
          </div>
        </b-col>
      </b-row>

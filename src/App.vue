@@ -6,7 +6,8 @@
     <div id="tabs">
     <md-tabs class="md-primary" md-alignment="fixed">
       <md-tab id="tab-home" md-label="Profile" @click="changeRoute('PROFILE')">
-        <div style='background-color:#FFFFFF'></div>
+        <div style='background-color:#FFFFFF' 
+              img src="https://flaticons.net/gd/makefg.php?i=icons/Application/User-Profile.png&r=255&g=255&b=255"></div>
       </md-tab>
       <md-tab id="tab-pages" md-label="Explore" @click="changeRoute('EXPLORE')">
         <div style='background-color:#FFFFFF'></div>

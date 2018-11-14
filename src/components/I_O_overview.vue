@@ -1,14 +1,14 @@
 <template>
   <div>
 
-      <div>
+      <div align='center'>
 
 <!--       {{columnsReal}}
       <br>
       <br>
       {{rowsReal}}
      -->
-      <vue-chart
+      <vue-chart 
         chart-type="LineChart"
         :columns="columnsReal"
         :rows="rowsReal"
