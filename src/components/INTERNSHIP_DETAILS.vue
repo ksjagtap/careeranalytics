@@ -1,7 +1,5 @@
 <template>
   <div>
-    <br>
-    <br>
     <h2>Internship Details</h2>
     <app-intern-det></app-intern-det>
   </div>

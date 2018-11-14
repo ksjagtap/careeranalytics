@@ -1,7 +1,5 @@
 <template>
   <div>
-    <br>
-    <br>
     <h2>Compare Internships Across Companies</h2>
     <app-comp_int></app-comp_int>
   </div>

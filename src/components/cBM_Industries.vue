@@ -20,18 +20,18 @@
      <b-row>
        <b-col cols="3">
          <b-list-group v-b-scrollspy:listgroup-ex>
-         </br>
-         </br>
+         <br>
+         <br>
            <b-list-group-item href="#list-item-1">Industries</b-list-group-item>
            <b-list-group-item href="#list-item-2">Job Position</b-list-group-item>
            <b-list-group-item href="#list-item-3">Salaries</b-list-group-item>
          </b-list-group>
        </b-col>
        <b-col cols="9">
-         <div v-if="!isHidden">
+         <div v-if="!isHidden" style="right:200px">
            <h6> Please Select Major </h6>
          </div>
-         <div v-show='isHidden'>
+         <div v-show='isHidden' style="position:relative;">
          <div id="listgroup-ex" style="position:relative;overflow-y:auto;height:400px">
            
           <br> 
@@ -41,14 +41,21 @@
           <br>
           <br>
           <br>
+          <br>
+          <br>
            <h4 id="list-item-2"><u>Job Position</u></h4>
-           <column-chart :data="jobStats"></column-chart>
+           <column-chart :data="jobStats" style="width: 100%; height: 300px;"></column-chart>
 
            <br>
            <br>
            <br>
+           <br>
+           <br>
            <h4 id="list-item-3"><u>Salaries</u></h4>
-           <div id="salChart" style="width: 100%; height: 250px;"></div>
+           <div id="salChart" style="width: 100%; height: 300px;"></div>
+           <br>
+           <br>
+           <br>
          </div>
          </div>
        </b-col>

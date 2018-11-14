@@ -22,7 +22,9 @@
     </div>
   </form>
 
-  <form>
+  <h6 v-show="!showCharts"> Please Select Position and Industry </h6>
+  <form v-show="showCharts">
+
     Percent Composition Of Interns In Selected Year :
     <label class="checkbox-inline">
       <input type="checkbox" value=true v-model="showYearOne">Year 1
@@ -38,7 +40,7 @@
     </label>
   </form>
 
-  <table align='center' class="table table-hover">
+  <table v-show="showCharts" align='center' class="table table-hover">
         <thead>
             <tr>
                 <th @click="sort('Name')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Name'">Name</th>

@@ -1,7 +1,7 @@
 <template>
 <div>
   <form>
-    <div class="row">
+    <div class="row ">
       <div class="col"></div>
       <div class="col">
         Company :
@@ -36,7 +36,7 @@
        </b-list-group>
      </b-col>
      <b-col cols="9">
-       <div v-if="!isHidden">
+       <div v-if="!isHidden" style="right:200px">
          <h6> Please Select Company and Position </h6>
        </br>
       </div>
@@ -45,19 +45,30 @@
 
          <br>
          <h4 id="list-item-1"><u>Hiring Trend Over The Years</u></h4>
-         <GChart type="LineChart" :data="hiringTrend" style="width: 100%; height: 250px;"/>
+         <GChart type="LineChart" :data="hiringTrend" style="width: 100%; height: 300px;"/>
 
+         <br>
+         <br>
+         <br>
+         <br>
          <br>
          <h4 id="list-item-2"><u>Distribution of CAP</u></h4>
-         <div id="capChart" style="width: 100%; height: 250px;"></div>
+         <div id="capChart" style="width: 100%; height: 300px;"></div>
 
+         <br>
+         <br>
+         <br>
+         <br>
          <br>
          <h4 id="list-item-3"><u>Distribution of Salary</u></h4>
-         <div id="salaryChart" style="width: 100%; height: 250px;"></div>
-
+         <div id="salaryChart" style="width: 100%; height: 300px;"></div>
+         <br>
+         <br>
+         <br>
+         <br>
          <br>
          <h4 id="list-item-4"><u>Major Counts</u></h4>
-         <GChart type="BarChart" :data="majors" style="width: 100%; height: 250px;"/>
+         <GChart type="BarChart" :data="majors" style="width: 100%; height: 300px;"/>
          <br>
          <br>
          <br>
