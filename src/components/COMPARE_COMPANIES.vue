@@ -11,27 +11,10 @@
 
 import comp_coy from './comp_coy.vue'
 
-
-  export default {
-    data: function() {
-      return{
-
-      }
-
-    },
-
-    components: {
-      'app-comp_coy': comp_coy
-    },
-
-    methods: {
-
-    },
-
-    firebase: {
-
-
-    }
+export default {
+  components: {
+    'app-comp_coy': comp_coy
   }
+}
 
 </script>

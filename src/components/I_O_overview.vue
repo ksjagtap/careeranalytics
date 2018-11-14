@@ -8,13 +8,13 @@
       <br>
       {{rowsReal}}
      -->
-      <vue-chart 
+      <vue-chart
         chart-type="LineChart"
         :columns="columnsReal"
         :rows="rowsReal"
         :options="options"
       ></vue-chart>
-      
+
       </div>
           <h2> Job Hiring Trend Per Industry </h2>
     <form>
@@ -23,8 +23,8 @@
         <div class="col">
           <select type="text" v-model="searchIndustry" placeholder="Search By Major" class="form-control form-control-sm">
           <option value="" disabled selected>Select Industry</option>
-          <option v-for="(ind, key) in industries" :value="key">{{key}}</option>
-          </select> </br> 
+          <option v-for="(ind, key) in industry" :value="key">{{key}}</option>
+          </select> </br>
           </div>
         <div class="col"></div>
       </div>
@@ -73,6 +73,7 @@ export default {
         dynamicGrads: [],
         dynamicJobs: [],
         isHidden: true,
+        rowsReal: [],
         options:
               {
                 title: 'Graduate Hiring Trend By Industries',
@@ -97,10 +98,16 @@ export default {
         this.dynamicGrads = this.getGradsInIndustry(val);
         this.dynamicJobs = this.getJobs(val);
         this.isHidden = false;
-      }
+      },
     },
 
     computed: {
+      industry(){
+        var result = this.industries;
+        delete result[".key"];
+        return result;
+      },
+
       jobPerYear(){
         var grads = this.dynamicGrads;
         var years = this.years;
@@ -126,8 +133,10 @@ export default {
         //console.log("RESULT", result);
         return result;
       },
+
       columnsReal() {
-        var inds = this.industry();
+        console.log("Forced");
+        var inds = this.industry;
         var res = [{'type': 'string',
                    'label': 'year'
                  }];
@@ -140,7 +149,7 @@ export default {
         return res
       },
 
-      rowsReal() {
+      rowssReal() {
         // store the indexes of each industry ==> which index in rows should this industry be?
         var industryIndexes = {}
 
@@ -164,7 +173,10 @@ export default {
           else if(year === "17") {rows[3][index+1]++}
 
         }
-        return rows
+        this.rowsReal = rows;
+        vm.$forceUpdate();
+        console.log("Forced");
+        return;
       }
     },
 
@@ -173,9 +185,9 @@ export default {
         return this.graduates;
       },
 
-      industry: function(){
-        return this.industries;
-      },
+      // industry: function(){
+      //   return this.industries;
+      // },
 
       getGradsInIndustry: function(val){
         var arr = [];
