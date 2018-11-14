@@ -68,7 +68,7 @@
          <br>
          <br>
          <h4 id="list-item-4"><u>Major Counts</u></h4>
-         <GChart type="BarChart" :data="majors" style="width: 100%; height: 300px;"/>
+         <GChart type="BarChart" :data="majors" :options="chartOptions" style="width: 100%; height: 300px;"/>
          <br>
          <br>
          <br>
@@ -107,6 +107,7 @@ export default {
             salary: [], //
             majors: [], //
             isHidden: false,
+            chartOptions: { hAxis: {format: '0'} },
         };
     },
     watch: {

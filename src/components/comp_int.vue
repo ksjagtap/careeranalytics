@@ -43,7 +43,7 @@
             <tr>
                 <th @click="sort('Name')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Name'">Name</th>
                 <th @click="sort('CAP')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Median CAP'">CAP</th>
-                <th @click="sort('Allowance')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Allowance'">Allowance</th>
+                <th @click="sort('Allowance')" onmouseover="" style="cursor: pointer;" v-b-popover.hover="'Sort by Median Allowance'">Allowance</th>
                 <th @click="sort('YearOne')" onmouseover="" style="cursor: pointer;" v-if="showYearOne" v-b-popover.hover="'Sort by Percentage of Year Ones (0.90 means 90% of interns were Year 1)'">Year One</th>
                 <th @click="sort('YearTwo')" onmouseover="" style="cursor: pointer;" v-if="showYearTwo" v-b-popover.hover="'Sort by Percentage of Year Twos (0.56 means 56% of interns were Year 2)'">Year Two</th>
                 <th @click="sort('YearThree')" onmouseover="" style="cursor: pointer;" v-if="showYearThree" v-b-popover.hover="'Sort by Percentage of Year Threes (0.44 means 44% of interns were Year 3)'">Year Three</th>
