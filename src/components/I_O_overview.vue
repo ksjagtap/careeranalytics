@@ -16,18 +16,23 @@
       ></vue-chart>
       
       </div>
-
-          <div v-show="isHidden">
-           <h6> Please Select Industry </h6>
-         </div>
-          <select type="text" v-model="searchIndustry" placeholder="Search By Major" >
+          <h2> Job Hiring Trend Per Industry </h2>
+    <form>
+      <div class="row">
+        <div class="col"></div>
+        <div class="col">
+          <select type="text" v-model="searchIndustry" placeholder="Search By Major" class="form-control form-control-sm">
           <option value="" disabled selected>Select Industry</option>
           <option v-for="(ind, key) in industries" :value="key">{{key}}</option>
-          </select> </br>
+          </select> </br> 
+          </div>
+        <div class="col"></div>
+      </div>
+    </form>
+
         <hr>
         <br>
         <div v-show="!isHidden">
-        <h2> Job Over Years </h2>
         <line-chart
             :data="jobPerYear"
             :legend="true">
